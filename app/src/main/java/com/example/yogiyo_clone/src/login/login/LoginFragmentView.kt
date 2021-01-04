@@ -1,13 +1,13 @@
 package com.example.yogiyo_clone.src.login.login
 
+import com.example.yogiyo_clone.src.login.login.model.LogInResult
 import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
 
 interface LoginFragmentView {
 
-    fun onGetUserSuccess(response: UserResponse)
+    fun onPostLogInSuccess(logInResult: LogInResult)
 
-    fun onGetUserFailure(message: String)
+    fun onPostLogInFailure(message: String)
 
     fun onPostSignUpSuccess(response: SignUpResponse)
 

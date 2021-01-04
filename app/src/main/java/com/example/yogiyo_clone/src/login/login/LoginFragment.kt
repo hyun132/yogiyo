@@ -1,60 +1,71 @@
 package com.example.yogiyo_clone.src.login.login
 
+import android.app.Application
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.BaseFragment
+import com.example.yogiyo_clone.databinding.FragmentLoginBinding
+import com.example.yogiyo_clone.src.login.login.model.PostLogInRequest
+import com.example.yogiyo_clone.src.login.login.model.LogInResult
+import com.example.yogiyo_clone.src.login.signupinfo.SignUpInfoFragment
+import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::bind, R.layout.fragment_login),
+        LoginFragmentView {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        binding.loginButton.setOnClickListener {
+            var email=binding.loginEmailTextview.text.toString()
+            var pw=binding.loginPasswordTextview.text.toString()
+            if(email.isNotEmpty() || pw.isNotEmpty()){
+                val loginRequest=PostLogInRequest(email,pw)
+                LoginService(this).tryLogIn(loginRequest)
+                Log.d("LoginButton Clicked","$email $pw")
             }
+        }
+
+        binding.loginSignupBtn.setOnClickListener {
+            val newFragment = SignUpInfoFragment()
+
+            val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
+                // Replace whatever is in the fragment_container view with this fragment,
+                // and add the transaction to the back stack so the user can navigate back
+                replace(R.id.login_frame, newFragment)
+                addToBackStack(null)
+            }
+            // Commit the transaction
+            transaction.commit();
+        }
+
+
+
     }
+
+    override fun onPostLogInSuccess(logInResult:LogInResult) {
+        val token=logInResult.jwt
+        val pref = requireActivity().getSharedPreferences("LOGIN_JSX_TOKEN", Application.MODE_PRIVATE)
+        pref.edit().putString("LOGIN_JSX_TOKEN",token).apply()
+        Log.d("LoginFragment","로그인성공")
+        Log.d("sharedPreference",pref.toString())
+        Toast.makeText(context, "로그인성공", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPostLogInFailure(message: String) {
+        Toast.makeText(context, "로그인을 해주세요", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPostSignUpSuccess(response: SignUpResponse) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onPostSignUpFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -19,7 +19,8 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
         </activity>
-        <activity android:name=".src.login.LoginActivity" />
+        <activity android:name=".src.login.LoginActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity android:name=".src.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
