@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/restaurant_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/inform_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/signature"
+        android:padding="4dp"
+        android:text="20분"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/restaurant_imageview"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/restaurant_name_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineHeight="20dp"
+        android:text="교촌치킨"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_imageview"
+        android:layout_marginTop="8dp"/>
+
+    <ImageView
+        android:id="@+id/review_grade_imageview"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview" />
+
+    <TextView
+        android:id="@+id/review_grade_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.4"
+        app:layout_constraintStart_toEndOf="@+id/review_grade_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview" />
+
+    <TextView
+        android:id="@+id/review_number_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="리뷰1,216"
+        app:layout_constraintStart_toEndOf="@+id/review_grade_textview"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:id="@+id/represent_menu_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="허니콤보, 레드콤보"
+        android:textColor="@color/light_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_grade_imageview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
