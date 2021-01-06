@@ -11,7 +11,6 @@ import com.example.yogiyo_clone.databinding.FragmentLoginBinding
 import com.example.yogiyo_clone.src.login.login.model.PostLogInRequest
 import com.example.yogiyo_clone.src.login.login.model.LogInResult
 import com.example.yogiyo_clone.src.login.signupinfo.SignUpInfoFragment
-import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::bind, R.layout.fragment_login),
@@ -60,12 +59,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::b
         Toast.makeText(context, "로그인을 해주세요", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onPostSignUpSuccess(response: SignUpResponse) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onPostSignUpFailure(message: String) {
-        TODO("Not yet implemented")
-    }
 
 }

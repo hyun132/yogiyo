@@ -15,12 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Yogiyo_clone"
         android:usesCleartextTraffic="true">
-        <activity android:name=".src.splash.SplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
-        </activity>
-        <activity android:name=".src.login.LoginActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"/>
+        <activity android:name=".src.searchaddress.SearchAddressMainActivity"></activity>
+        <activity
+            android:name=".src.splash.SplashActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".src.login.LoginActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity android:name=".src.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

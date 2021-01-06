@@ -1,58 +1,97 @@
 package com.example.yogiyo_clone.src.login.phoneconfirm
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.provider.ContactsContract
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.BaseFragment
+import com.example.yogiyo_clone.databinding.FragmentPhoneConfirmBinding
+import com.example.yogiyo_clone.src.login.login.LoginFragment
+import com.example.yogiyo_clone.src.login.phoneconfirm.model.PhoneAuthResponse
+import com.example.yogiyo_clone.src.login.phoneconfirm.model.PostSignUpRequest
+import com.example.yogiyo_clone.src.login.phoneconfirm.model.PostphoneAuthRequest
+import com.example.yogiyo_clone.src.login.phoneconfirm.model.SignUpResponse
+import com.example.yogiyo_clone.src.login.signupinfo.SignUpInfoFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class PhoneConfirmFragment : BaseFragment<FragmentPhoneConfirmBinding>(FragmentPhoneConfirmBinding::bind, R.layout.fragment_phone_confirm),
+        PhoneAuthFragmentView {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PhoneConfirmFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PhoneConfirmFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+//    var email:String by lazy { requireArguments().getString("email") }
+    var email:String=""
+    var password:String=""
+    var nickname:String=""
+    var push:Int=0
+    lateinit var phoneNumber:String
+    var authNumber:Int? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    var isSmsSended=false
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        var userInfo = this.arguments
+
+        if (userInfo != null) {
+            email= userInfo.getString("email").toString()
+            password= userInfo.getString("pw").toString()
+            nickname= userInfo.getString("nickname").toString()
+            push= userInfo.getInt("push")
         }
+
+
+
+        binding.sendSmsButton.setOnClickListener {
+            if(binding.phoneNumberTextview.text.isNotBlank()){
+                phoneNumber=binding.phoneNumberTextview.text.toString()
+                val postphoneAuthRequest=PostphoneAuthRequest(phoneNumber)
+                PhoneConfirmService(this).trySendSms(postphoneAuthRequest)
+            }
+        }
+
+        binding.phoneConfirmSignupButton.setOnClickListener {
+            Log.d("SignupButton Clicked: "," ${binding.phoneCodeTextview.text}")
+            Log.d("LoginButton Clicked","$email $password")
+            if (isSmsSended && binding.phoneCodeTextview.text.isNotEmpty()){
+                authNumber=binding.phoneCodeTextview.text.toString().toInt()
+                val signupRequest=PostSignUpRequest(email,password,nickname,push,phoneNumber,authNumber!!)
+                PhoneConfirmService(this).trySignUp(signupRequest)
+            }
+            else showCustomToast("핸드폰 인증을 먼저 해주세요")
+        }
+
+
+
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_phone_confirm, container, false)
+    override fun onPostSendSmsSuccess(phoneAuthResponse: PhoneAuthResponse) {
+        //여기서 모든 정보 보내서 회원가입하는 부분 작성해야함.
+        isSmsSended=true
+        Log.d("PhoneConfirmFragment: "," 핸드폰 인증 성공!")
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PhoneConfirmFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-                PhoneConfirmFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+    override fun onPostSendSmsFailure(message: String) {
+        Log.d("PhoneConfirmFragment: "," 핸드폰 인증 실패")
     }
+
+    override fun onPostSignUpSuccess(signUpResponse: SignUpResponse) {
+        Log.d("PhoneConfirmFragment: "," 회원가입 성공!")
+
+        val newFragment = LoginFragment()
+
+        val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            replace(R.id.login_frame, newFragment)
+            addToBackStack(null)
+        }
+        // Commit the transaction
+        transaction.commit();
+    }
+
+    override fun onPostSignUpFailure(message: String) {
+        Log.d("PhoneConfirmFragment: "," 회원가입 실패")
+    }
+
 }

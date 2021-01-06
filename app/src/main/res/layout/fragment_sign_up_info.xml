@@ -286,6 +286,38 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/push_alert_agreement_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/personal_information_agreement_area"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp">
+
+            <CheckBox
+                android:id="@+id/push_alert_agreement_checkbox"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:gravity="center"
+                android:background="@drawable/square_border"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="요기요 혜택 알림 동의 (선택)"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내용보기" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/signup_info_next_button"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -294,7 +326,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/personal_information_agreement_area"
+            app:layout_constraintTop_toBottomOf="@+id/push_alert_agreement_area"
             android:background="@drawable/square_border">
 
             <TextView
@@ -312,6 +344,8 @@
                 android:src="@drawable/ic_right_arrow" />
 
         </LinearLayout>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

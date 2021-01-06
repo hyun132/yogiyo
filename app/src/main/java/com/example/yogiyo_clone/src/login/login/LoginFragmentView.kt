@@ -1,7 +1,6 @@
 package com.example.yogiyo_clone.src.login.login
 
 import com.example.yogiyo_clone.src.login.login.model.LogInResult
-import com.softsquared.template.kotlin.src.main.home.models.SignUpResponse
 
 interface LoginFragmentView {
 
@@ -9,7 +8,7 @@ interface LoginFragmentView {
 
     fun onPostLogInFailure(message: String)
 
-    fun onPostSignUpSuccess(response: SignUpResponse)
-
-    fun onPostSignUpFailure(message: String)
+//    fun onPostSignUpSuccess(response: SignUpResponse)
+//
+//    fun onPostSignUpFailure(message: String)
 }
