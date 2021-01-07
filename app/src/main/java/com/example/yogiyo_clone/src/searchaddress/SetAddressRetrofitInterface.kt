@@ -8,9 +8,9 @@ import retrofit2.http.*
 
 interface SetAddressRetrofitInterface {
 
-    @POST("/addresses")
+    @GET("/addresses")
     fun searchMyLocation(
-        @Query("keyword") keyword: String
+        @Query("keyword",encoded = true) keyword: String
         ) : Call<SearchAddressResponse>
 
     @POST("/addresses-join")

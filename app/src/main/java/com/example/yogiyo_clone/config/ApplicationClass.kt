@@ -36,7 +36,7 @@ class ApplicationClass:Application() {
     override fun onCreate() {
         super.onCreate()
         sSharedPreferences =
-            applicationContext.getSharedPreferences("LOGIN_JSX_TOKEN", MODE_PRIVATE)
+            applicationContext.getSharedPreferences(X_ACCESS_TOKEN, MODE_PRIVATE)
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
     }

@@ -1,10 +1,12 @@
 package com.example.yogiyo_clone.src.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentHomeBinding
+import com.example.yogiyo_clone.src.searchaddress.SearchAddressMainActivity
 import com.softsquared.template.kotlin.src.main.home.models.UserResponse
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
@@ -13,6 +15,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.addressButton.setOnClickListener {
+            var intent = Intent(context,SearchAddressMainActivity::class.java)
+            startActivity(intent)
+        }
 //        binding.homeButtonTryGetJwt.setOnClickListener {
 //            showLoadingDialog(context!!)
 //            HomeService(this).tryGetUsers() // 서비스에 이 뷰를 넘겨줌. 그러면 서비스에서 요청 처리한뒤

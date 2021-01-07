@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentLoginBinding
 import com.example.yogiyo_clone.src.login.login.model.PostLogInRequest
@@ -48,10 +49,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::b
 
     override fun onPostLogInSuccess(logInResult:LogInResult) {
         val token=logInResult.jwt
-        val pref = requireActivity().getSharedPreferences("LOGIN_JSX_TOKEN", Application.MODE_PRIVATE)
-        pref.edit().putString("LOGIN_JSX_TOKEN",token).apply()
+        val pref = requireActivity().getSharedPreferences(X_ACCESS_TOKEN, Application.MODE_PRIVATE)
+        pref.edit().putString(X_ACCESS_TOKEN,token).apply()
         Log.d("LoginFragment","로그인성공")
-        Log.d("sharedPreference",pref.toString())
+        Log.d("sharedPreference",token)
         Toast.makeText(context, "로그인성공", Toast.LENGTH_SHORT).show()
     }
 

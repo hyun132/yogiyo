@@ -4,11 +4,12 @@ import com.example.yogiyo_clone.config.ApplicationClass
 import com.example.yogiyo_clone.src.searchaddress.mapSearch.model.PostSetMyAddressRequest
 import com.example.yogiyo_clone.src.searchaddress.textSearch.model.SearchAddressResponse
 import com.example.yogiyo_clone.src.searchaddress.model.SetAddressResponse
+import com.example.yogiyo_clone.src.searchaddress.textSearch.SearchTextAddressFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SearchAddressService(val view: SearchAddressMainActivity) { // 얘는 이전에 repository랑 비슷한 역할
+class SearchAddressService(val view: SearchTextAddressFragment) { // 얘는 이전에 repository랑 비슷한 역할
 
     fun trySearchAddressByText(keyword:String){
         val setAddressRetrofitInterface = ApplicationClass.sRetrofit.create(
@@ -18,11 +19,15 @@ class SearchAddressService(val view: SearchAddressMainActivity) { // 얘는 이�
                 call: Call<SearchAddressResponse>,
                 response: Response<SearchAddressResponse>
             ) {
-                TODO("Not yet implemented")
+                response.body()?.result.let {
+                    if (it != null) {
+                        view.onPostAddressSearchSuccess(it)
+                    }
+                }
             }
 
             override fun onFailure(call: Call<SearchAddressResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                t.message?.let { view.onPostAddressSearchFailure(it) }
             }
 
         })
