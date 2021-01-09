@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.LatLng
 
 
 class MapsFragment : OnMapReadyCallback,Fragment() {
-
+    val locationRequestId = 100
     private var googleMap: GoogleMap? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var manager:LocationManager
@@ -94,37 +94,37 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
 
     val MY_PERMISSIONS_REQUEST_LOCATION = 99
 
-    private fun checkLocationPermissionWithRationale() {
-        if (ContextCompat.checkSelfPermission(
-                requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    requireActivity(),
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            ) {
-                AlertDialog.Builder(requireContext())
-                    .setTitle("위치정보")
-                    .setMessage("이 앱을 사용하기 위해서는 위치정보에 접근이 필요합니다. 위치정보 접근을 허용하여 주세요.")
-                    .setPositiveButton("확인",
-                        DialogInterface.OnClickListener { dialogInterface, i ->
-                            requestPermissions(
-                                requireActivity(), arrayOf(
-                                    Manifest.permission.ACCESS_FINE_LOCATION
-                                ), MY_PERMISSIONS_REQUEST_LOCATION
-                            )
-                        }).create().show()
-            } else {
-                requestPermissions(
-                    requireActivity(),
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    MY_PERMISSIONS_REQUEST_LOCATION
-                )
-            }
-        }
-    }
+//    private fun checkLocationPermissionWithRationale() {
+//        if (ContextCompat.checkSelfPermission(
+//                requireActivity(),
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(
+//                    requireActivity(),
+//                    Manifest.permission.ACCESS_FINE_LOCATION
+//                )
+//            ) {
+//                AlertDialog.Builder(requireContext())
+//                    .setTitle("위치정보")
+//                    .setMessage("이 앱을 사용하기 위해서는 위치정보에 접근이 필요합니다. 위치정보 접근을 허용하여 주세요.")
+//                    .setPositiveButton("확인",
+//                        DialogInterface.OnClickListener { dialogInterface, i ->
+//                            requestPermissions(
+//                                requireActivity(), arrayOf(
+//                                    Manifest.permission.ACCESS_FINE_LOCATION
+//                                ), MY_PERMISSIONS_REQUEST_LOCATION
+//                            )
+//                        }).create().show()
+//            } else {
+//                requestPermissions(
+//                    requireActivity(),
+//                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+//                    MY_PERMISSIONS_REQUEST_LOCATION
+//                )
+//            }
+//        }
+//    }
 
     override fun onMapReady(map: GoogleMap?) {
         googleMap=map
@@ -139,7 +139,8 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
                 currentLocation = googleMap!!.getProjection().getVisibleRegion().latLngBounds.getCenter()
                 Log.d("currentLocation : ","Lat : ${currentLocation.latitude}, lng : ${currentLocation.longitude}")
             } else {
-                checkLocationPermissionWithRationale();
+                askLocationPermission()
+//                checkLocationPermissionWithRationale();
             }
         }
         if (googleMap != null) { // 이 설정은 onMapReady에서 설정해야 먹음.. 다른곳에서 하니 설정이안먹힘..
@@ -156,6 +157,22 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
             })
         }
 
+    }
+
+    fun askLocationPermission(){
+        ActivityCompat.requestPermissions(requireActivity(),arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),locationRequestId)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode==locationRequestId){
+            if(grantResults!=null && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                //get addr
+            }
+        }
     }
 
 }
