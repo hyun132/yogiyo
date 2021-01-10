@@ -1,8 +1,11 @@
 package com.example.yogiyo_clone.src.searchaddress.mapSearch
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.Observer
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.roadAddress
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentSearchMapBinding
 import com.example.yogiyo_clone.src.login.login.LoginFragmentView
@@ -28,7 +31,15 @@ class SearchMapFragment : BaseFragment<FragmentSearchMapBinding>(FragmentSearchM
         // Commit the transaction
         transaction.commit();
 
+        roadAddress.observe(this.viewLifecycleOwner, Observer {
+            Log.d("observe","$it")
+            binding.streetNameAddressTextview.text="[도로명] $it"
+        })
     }
+
+//    fun setAddress(address:String){
+//        binding.streetNameAddressTextview.text=address
+//    }
 
     override fun onPostLogInSuccess(logInResult: LogInResult) {
         TODO("Not yet implemented")

@@ -2,64 +2,83 @@ package com.example.yogiyo_clone.src.main.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.HorizontalScrollView
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentHomeBinding
+import com.example.yogiyo_clone.src.login.signupinfo.SignUpInfoFragment
+import com.example.yogiyo_clone.src.main.home.models.Category
+import com.example.yogiyo_clone.src.main.home.models.HomeResponse
 import com.example.yogiyo_clone.src.searchaddress.SearchAddressMainActivity
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import com.example.yogiyo_clone.util.HorizentalFragment
+import com.example.yogiyo_clone.util.HorizontalRecyclerDecoration
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
     HomeFragmentView {
 
+    val categories = arrayOf(
+        Category("전체보기",R.drawable.circle_background,0),
+        Category("익스프레스",R.drawable.circle_background,1),
+        Category("중국집",R.drawable.circle_background,2),
+        Category("한식",R.drawable.circle_background,4),
+        Category("찜/탕",R.drawable.circle_background,6),
+        Category("분식",R.drawable.circle_background,8),
+        Category("일식/돈까스",R.drawable.circle_background,10),
+        Category("족발/보쌈",R.drawable.circle_background,12),
+        Category("편의점/마트",R.drawable.circle_background,14),
+        Category("테이크아웃",R.drawable.circle_background,15),
+        Category("치킨",R.drawable.circle_background,3),
+        Category("피자/양식",R.drawable.circle_background,5),
+        Category("카페/디저트",R.drawable.circle_background,7),
+        Category("1인분주문",R.drawable.circle_background,9),
+        Category("야식",R.drawable.circle_background,11),
+        Category("프랜차이즈",R.drawable.circle_background,13)
+    )
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val adapter=HomeCategoryAdapter(categories)
 
+        adapter.setItemClickListener(object :HomeCategoryAdapter.ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+
+            }
+
+        })
+
+        binding.categoryRecyclerview.adapter=adapter
+        binding.categoryRecyclerview.layoutManager=GridLayoutManager(context,2,GridLayoutManager.HORIZONTAL,false)
+        binding.categoryRecyclerview.addItemDecoration(HorizontalRecyclerDecoration(32))
         binding.addressButton.setOnClickListener {
             var intent = Intent(context,SearchAddressMainActivity::class.java)
             startActivity(intent)
         }
-//        binding.homeButtonTryGetJwt.setOnClickListener {
-//            showLoadingDialog(context!!)
-//            HomeService(this).tryGetUsers() // 서비스에 이 뷰를 넘겨줌. 그러면 서비스에서 요청 처리한뒤
-////                                                    이 뷰의 onGetUserSuccess, onGetUserFailure 를 실행함.
-//        }
-//
-//        binding.homeBtnTryPostHttpMethod.setOnClickListener {
-//            val email = binding.homeEtId.text.toString()
-//            val password = binding.homeEtPw.text.toString()
-//            val postRequest = PostSignUpRequest(
-//                email = email, password = password,
-//                confirmPassword = password, nickname = "test", phoneNumber = "010-0000-0000"
-//            )
-//            showLoadingDialog(context!!)
-//            HomeService(this).tryPostSignUp(postRequest)
-//        }
+
+        HomeService(this).tryGetHomeInfo()
+
     }
 
-    override fun onGetUserSuccess(response: UserResponse) {
-        dismissLoadingDialog()
-//        for (User in response.result) {
-//            Log.d("HomeFragment", User.toString())
-//        }
-//        binding.homeButtonTryGetJwt.text = response.message
-//        showCustomToast("Get JWT 성공")
+    override fun onGetHomeInfoSuccess(response: HomeResponse) {
+
+        binding.addressButton.text="${response.result.address}▾"
+        val newFragment = HorizentalFragment(response.result.themes[0])
+        val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            replace(R.id.theme1_fragment, newFragment)
+            addToBackStack(null)
+        }
+        // Commit the transaction
+        transaction.commit();
     }
 
-    override fun onGetUserFailure(message: String) {
-        dismissLoadingDialog()
-//        showCustomToast("오류 : $message")
+    override fun onGetHomeInfoFailure(message: String) {
+        Log.d("getHomeInfo : ","fail")
     }
 
-//    override fun onPostSignUpSuccess(response: SignUpResponse) {
-//        dismissLoadingDialog()
-////        binding.homeBtnTryPostHttpMethod.text = response.message
-////        showCustomToast(response.message)
-//    }
 
-    override fun onPostSignUpFailure(message: String) {
-//        dismissLoadingDialog()
-//        showCustomToast("오류 : $message")
-    }
 }

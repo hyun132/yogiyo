@@ -1,4 +1,4 @@
-package com.softsquared.template.kotlin.src.main.home.models
+package com.example.yogiyo_clone.src.main.myyogiyo.models
 
 import com.google.gson.annotations.SerializedName
 

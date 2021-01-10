@@ -1,14 +1,14 @@
 package com.example.yogiyo_clone.src.main.home
 
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import com.example.yogiyo_clone.src.main.home.models.HomeResponse
 
 interface HomeFragmentView {
 
-    fun onGetUserSuccess(response: UserResponse)
+    fun onGetHomeInfoSuccess(response: HomeResponse)
 
-    fun onGetUserFailure(message: String)
+    fun onGetHomeInfoFailure(message: String)
 
 //    fun onPostSignUpSuccess(response: SignUpResponse)
-
-    fun onPostSignUpFailure(message: String)
+//
+//    fun onPostSignUpFailure(message: String)
 }

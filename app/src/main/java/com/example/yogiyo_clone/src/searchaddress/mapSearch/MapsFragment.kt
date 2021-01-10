@@ -1,9 +1,9 @@
 package com.example.yogiyo_clone.src.searchaddress.mapSearch
 
 import android.Manifest
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -11,19 +11,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.roadAddress
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MapsFragment : OnMapReadyCallback,Fragment() {
@@ -152,10 +151,33 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
                         currentLocation,
                         15F
                     )
+                    var taddress = convertToAddress(currentLocation)
+
+//                    SearchMapFragment().apply {
+//                        arguments=Bundle().apply {
+//                            putString("address", address.toString())
+//                        }
+//                    }
+                    taddress.let {
+                        roadAddress.value=taddress.toString()
+                    }
+
                 }
 
             })
         }
+
+    }
+
+    fun convertToAddress(latLng: LatLng):String{
+        var geocoder:Geocoder
+        var addressList=ArrayList<Address>()
+
+        geocoder= Geocoder(requireContext(), Locale.getDefault())
+        addressList = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1) as ArrayList<Address>
+
+        Log.d("original addr : ", addressList.get(0).toString())
+        return addressList.get(0).getAddressLine(0)
 
     }
 

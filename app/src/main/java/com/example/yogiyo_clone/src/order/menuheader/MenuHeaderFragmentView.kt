@@ -1,9 +1,10 @@
 package com.example.yogiyo_clone.src.order.menuheader
 
 import com.example.yogiyo_clone.src.login.signupinfo.model.PostUserValicationResponse
+import com.example.yogiyo_clone.src.order.menuheader.model.MenuHeaderResponse
 
 interface MenuHeaderFragmentView {
-    fun onPostLoadMenuSuccess(response: PostUserValicationResponse)
+    fun onGetMenuHeaderSuccess(response: MenuHeaderResponse)
 
-    fun onPostLoadMenuFailure(message: String)
+    fun onGetMenuHeaderFailure(message: String)
 }

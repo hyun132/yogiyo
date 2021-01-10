@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".src.main.home.HomeFragment">
+    tools:context=".src.main.home.HomeFragment"
+    android:background="@color/light_gray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_action_bar"
@@ -12,7 +13,8 @@
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/address_button"
@@ -31,10 +33,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_action_bar">
+        app:layout_constraintTop_toBottomOf="@+id/home_action_bar"
+        app:layout_constraintVertical_weight="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,9 +46,10 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/ad_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="150dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/white"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_recyclerview"
@@ -55,35 +59,22 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ad_viewpager" />
+                app:layout_constraintTop_toBottomOf="@+id/ad_viewpager"
+                android:background="@color/white"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"/>
 
-            <TextView
-                android:id="@+id/category_title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="나의 입맛 저격!"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/category_recyclerview" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="16dp"
-                android:id="@+id/category_recyclerview1"
+            <FrameLayout
+                android:id="@+id/theme1_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="parent"
-                android:orientation="horizontal"/>
-
+                app:layout_constraintTop_toBottomOf="@id/category_recyclerview"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

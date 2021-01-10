@@ -7,7 +7,7 @@ import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentMyYogiyoBinding
 import com.example.yogiyo_clone.src.login.LoginActivity
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import com.example.yogiyo_clone.src.main.myyogiyo.models.UserResponse
 
 class MyYogiyoFragment : BaseFragment<FragmentMyYogiyoBinding>(FragmentMyYogiyoBinding::bind, R.layout.fragment_my_yogiyo),
     MyyogiyoFragmentView {
@@ -29,11 +29,12 @@ class MyYogiyoFragment : BaseFragment<FragmentMyYogiyoBinding>(FragmentMyYogiyoB
     }
 
     override fun onGetUserInfoSuccess(response: UserResponse) {
-
+        TODO("Not yet implemented")
     }
 
     override fun onGetUserInfoFailure(message: String) {
-
+        TODO("Not yet implemented")
     }
+
 
 }

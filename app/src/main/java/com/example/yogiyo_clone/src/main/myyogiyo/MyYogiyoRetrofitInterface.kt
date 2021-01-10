@@ -1,6 +1,6 @@
 package com.example.yogiyo_clone.src.main.myyogiyo
 
-import com.softsquared.template.kotlin.src.main.home.models.UserResponse
+import com.example.yogiyo_clone.src.main.myyogiyo.models.UserResponse
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -3,6 +3,7 @@ package com.example.yogiyo_clone.config
 import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,6 +31,9 @@ class ApplicationClass:Application() {
 
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
+
+        var roadAddress= MutableLiveData<String>().apply { postValue("서울특별시 강남구 역삼동 강남대로 438") }
+        var address= MutableLiveData<String>().apply { postValue("서울 강남구 역삼동 814-6") }
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.

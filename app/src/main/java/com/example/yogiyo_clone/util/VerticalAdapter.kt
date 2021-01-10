@@ -7,20 +7,20 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yogiyo_clone.R
-import com.softsquared.template.kotlin.src.main.home.models.ResultRestaurant
+import com.example.yogiyo_clone.src.main.home.models.Store
 
 class VerticalAdapter: RecyclerView.Adapter<VerticalAdapter.VerticalViewHolder>() {
 
 //    private var savedMovieList= emptyList<MovieModel>()
 
-    private val differCallback = object : DiffUtil.ItemCallback<ResultRestaurant>() {
+    private val differCallback = object : DiffUtil.ItemCallback<Store>() {
         //둘이 같은 객체인지
-        override fun areItemsTheSame(oldItem: ResultRestaurant, newItem: ResultRestaurant): Boolean {
-            return oldItem.restaurant_name == newItem.restaurant_name // 나중에 id로 변경
+        override fun areItemsTheSame(oldItem: Store, newItem: Store): Boolean {
+            return oldItem.storeIdx == newItem.storeIdx // 나중에 id로 변경
         }
 
         //둘이 같은 아이템인지
-        override fun areContentsTheSame(oldItem: ResultRestaurant, newItem: ResultRestaurant): Boolean {
+        override fun areContentsTheSame(oldItem: Store, newItem: Store): Boolean {
             return oldItem == newItem
         }
 
@@ -30,7 +30,7 @@ class VerticalAdapter: RecyclerView.Adapter<VerticalAdapter.VerticalViewHolder>(
 
     class VerticalViewHolder(itemview:View):RecyclerView.ViewHolder(itemview){
 
-        fun bind(item : ResultRestaurant){
+        fun bind(item : Store){
 
         }
     }
