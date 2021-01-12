@@ -1,4 +1,4 @@
-package com.example.yogiyo_clone.src.searchaddress.model
+package com.example.yogiyo_clone.src.searchaddress.mapSearch.model
 
 import com.google.gson.annotations.SerializedName
 

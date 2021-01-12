@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.maps.model.LatLng
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -34,6 +35,7 @@ class ApplicationClass:Application() {
 
         var roadAddress= MutableLiveData<String>().apply { postValue("서울특별시 강남구 역삼동 강남대로 438") }
         var address= MutableLiveData<String>().apply { postValue("서울 강남구 역삼동 814-6") }
+        var currentLatLng=LatLng(37.400000, 127.0210000)
     }
 
     // 앱이 처음 생성되는 순간, SP를 새로 만들어주고, 레트로핏 인스턴스를 생성합니다.

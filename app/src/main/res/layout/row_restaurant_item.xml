@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/restaurant_imageview"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,14 +23,15 @@
         android:text="네네치킨-금정점"
         app:layout_constraintStart_toEndOf="@+id/restaurant_imageview"
         app:layout_constraintTop_toTopOf="@+id/restaurant_imageview"
-        android:textSize="16dp"/>
+        android:textSize="14dp"
+        android:textColor="@color/black"/>
 
 
     <ImageView
         android:id="@+id/review_grade_imageview"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_start"
         app:layout_constraintStart_toEndOf="@+id/restaurant_imageview"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview"
         android:layout_marginStart="8dp"/>
@@ -41,7 +42,9 @@
         android:layout_height="wrap_content"
         android:text="4.4"
         app:layout_constraintStart_toEndOf="@+id/review_grade_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview"
+        android:textSize="12sp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/review_number_textview"
@@ -50,7 +53,9 @@
         android:text="리뷰1,216"
         app:layout_constraintStart_toEndOf="@+id/review_grade_textview"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview"
-        android:layout_marginStart="4dp"/>
+        android:layout_marginStart="4dp"
+        android:textSize="12sp"
+        />
 
     <TextView
         android:id="@+id/represent_discount_textview"
@@ -60,25 +65,30 @@
         android:textColor="@color/signature"
         app:layout_constraintStart_toEndOf="@+id/restaurant_imageview"
         app:layout_constraintTop_toBottomOf="@+id/review_grade_imageview"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        android:textSize="12sp"/>
 
     <TextView
-        android:id="@+id/represent_deliver_fee"
+        android:id="@+id/deliver_fee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="배달요금 2000원"
         app:layout_constraintStart_toEndOf="@+id/restaurant_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/represent_discount_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/represent_discount_textview"
+        android:textSize="10sp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/represent_deliver_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="50-60분"
-        app:layout_constraintBottom_toBottomOf="@+id/represent_deliver_fee"
+        app:layout_constraintBottom_toBottomOf="@+id/deliver_fee"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/represent_discount_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/represent_discount_textview"
+        android:textSize="10sp"
+        android:textColor="@color/black"/>
 
 
 

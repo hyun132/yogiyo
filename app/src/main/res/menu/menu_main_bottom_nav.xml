@@ -17,4 +17,11 @@
         android:enabled="true"
         android:title="@string/main_btm_nav_mypage_title" />
 
+    <item
+        android:id="@+id/temp"
+        android:icon="@drawable/ic_myyogiyo"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="temp" />
+
 </menu>

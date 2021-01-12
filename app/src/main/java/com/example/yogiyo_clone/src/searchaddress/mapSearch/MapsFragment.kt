@@ -6,6 +6,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.currentLatLng
 import com.example.yogiyo_clone.config.ApplicationClass.Companion.roadAddress
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -25,13 +27,13 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MapsFragment : OnMapReadyCallback,Fragment() {
+class MapsFragment : OnMapReadyCallback, Fragment() {
     val locationRequestId = 100
     private var googleMap: GoogleMap? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    lateinit var manager:LocationManager
-    var currentLocation=LatLng(37.4,127.02)
-    lateinit var mapFragment :SupportMapFragment
+    lateinit var manager: LocationManager
+    var currentLocation = LatLng(37.4, 127.02)
+    lateinit var mapFragment: SupportMapFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,15 +54,23 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        val latlng = arguments?.getString("latlng")
+//        if (latlng != null) {
+//            Log.d("latlng",latlng)
+//        }
+//
+//        if(latlng!=null) {
+//            var loc = latlng.split(' ')
+//            currentLocation= LatLng(loc[0].toDouble(),loc[1].toDouble())
+//            setMyLocation(currentLocation)
+//        }
+//
         mapFragment.getMapAsync(this);
-
-
-
-
 
     }
 
-    fun getCurrentLocation(){
+    fun getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -71,13 +81,13 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
         ) {
             return
         }
-        fusedLocationClient=FusedLocationProviderClient(requireActivity())
+        fusedLocationClient = FusedLocationProviderClient(requireActivity())
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: android.location.Location? ->
                 if (location != null) {
                     currentLocation = LatLng(location.latitude, location.longitude)
                     Log.d("getLocation", location.toString())
-                    mapFragment?.getMapAsync { googleMap->
+                    mapFragment?.getMapAsync { googleMap ->
                         googleMap.moveCamera(
                             CameraUpdateFactory.newLatLngZoom(
                                 currentLocation,
@@ -85,6 +95,7 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
                             )
                         )
                     }
+                    currentLatLng=currentLocation
                 }
 
             }
@@ -126,27 +137,45 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
 //    }
 
     override fun onMapReady(map: GoogleMap?) {
-        googleMap=map
+        googleMap = map
 
         if (googleMap != null) {
-            getCurrentLocation()
+            val latlng = arguments?.getString("latlng")
+            if (latlng != null) {
+                var loc = latlng.split(' ')
+                currentLocation = LatLng(loc[0].toDouble(), loc[1].toDouble())
+                setMyLocation(currentLocation)
+            } else getCurrentLocation()
+
 
             googleMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15F))
 
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 googleMap!!.setMyLocationEnabled(true);
-                currentLocation = googleMap!!.getProjection().getVisibleRegion().latLngBounds.getCenter()
-                Log.d("currentLocation : ","Lat : ${currentLocation.latitude}, lng : ${currentLocation.longitude}")
+                currentLocation =
+                    googleMap!!.getProjection().getVisibleRegion().latLngBounds.getCenter()
+                Log.d(
+                    "currentLocation : ",
+                    "Lat : ${currentLocation.latitude}, lng : ${currentLocation.longitude}"
+                )
             } else {
                 askLocationPermission()
 //                checkLocationPermissionWithRationale();
             }
         }
         if (googleMap != null) { // 이 설정은 onMapReady에서 설정해야 먹음.. 다른곳에서 하니 설정이안먹힘..
-            googleMap!!.setOnCameraIdleListener(object :GoogleMap.OnCameraIdleListener{
+            googleMap!!.setOnCameraIdleListener(object : GoogleMap.OnCameraIdleListener {
                 override fun onCameraIdle() {
-                    currentLocation = googleMap!!.getProjection().getVisibleRegion().latLngBounds.getCenter()
-                    Log.d("currentLocation : ","Lat : ${currentLocation.latitude}, lng : ${currentLocation.longitude}")
+                    currentLocation =
+                        googleMap!!.getProjection().getVisibleRegion().latLngBounds.getCenter()
+                    Log.d(
+                        "currentLocation : ",
+                        "Lat : ${currentLocation.latitude}, lng : ${currentLocation.longitude}"
+                    )
                     CameraUpdateFactory.newLatLngZoom(
                         currentLocation,
                         15F
@@ -159,7 +188,7 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
 //                        }
 //                    }
                     taddress.let {
-                        roadAddress.value=taddress.toString()
+                        roadAddress.value = taddress.toString()
                     }
 
                 }
@@ -169,20 +198,58 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
 
     }
 
-    fun convertToAddress(latLng: LatLng):String{
-        var geocoder:Geocoder
-        var addressList=ArrayList<Address>()
+    fun setMyLocation(location: LatLng) {
 
-        geocoder= Geocoder(requireContext(), Locale.getDefault())
-        addressList = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1) as ArrayList<Address>
+        currentLocation = LatLng(location.latitude, location.longitude)
+        Log.d("getLocation", location.toString())
+        mapFragment?.getMapAsync { googleMap ->
+            googleMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    currentLocation,
+                    18F
+                )
+            )
+        }
+
+        Log.d(
+            "setMyLocation : ",
+            "Lat : ${currentLocation.latitude}, lng : ${currentLocation.longitude}"
+        )
+        CameraUpdateFactory.newLatLngZoom(
+            currentLocation,
+            15F
+        )
+        var taddress = convertToAddress(currentLocation)
+
+        taddress.let {
+            roadAddress.value = taddress
+        }
+
+
+    }
+
+    fun convertToAddress(latLng: LatLng): String {
+        var geocoder: Geocoder
+        var addressList = ArrayList<Address>()
+
+        geocoder = Geocoder(requireContext(), Locale.KOREA)
+        addressList =
+            geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1) as ArrayList<Address>
 
         Log.d("original addr : ", addressList.get(0).toString())
         return addressList.get(0).getAddressLine(0)
 
     }
 
-    fun askLocationPermission(){
-        ActivityCompat.requestPermissions(requireActivity(),arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),locationRequestId)
+    fun askLocationPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ),
+            locationRequestId
+        )
     }
 
     override fun onRequestPermissionsResult(
@@ -190,8 +257,8 @@ class MapsFragment : OnMapReadyCallback,Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode==locationRequestId){
-            if(grantResults!=null && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == locationRequestId) {
+            if (grantResults != null && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //get addr
             }
         }

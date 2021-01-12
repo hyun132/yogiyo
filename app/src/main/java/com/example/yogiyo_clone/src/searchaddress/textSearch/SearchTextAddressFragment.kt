@@ -4,6 +4,7 @@ import android.net.Uri.encode
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.example.yogiyo_clone.src.searchaddress.SearchAddressService
 import com.example.yogiyo_clone.src.searchaddress.mapSearch.SearchMapFragment
 import com.example.yogiyo_clone.src.searchaddress.textSearch.model.AddressResult
 import com.example.yogiyo_clone.src.searchaddress.textSearch.model.SearchAddressResponse
+import com.example.yogiyo_clone.util.HorizentalFragment
 import java.util.*
 
 class SearchTextAddressFragment : BaseFragment<FragmentSearchTextAddressBinding>(FragmentSearchTextAddressBinding::bind, R.layout.fragment_search_text_address),
@@ -87,6 +89,22 @@ SearchTextAddressFragmentView {
                     itemView.findViewById<TextView>(R.id.address_item_textview).text=item.jibunAddr
                 }else{
                     itemView.findViewById<TextView>(R.id.address_item_textview).text=item.roadAddr
+                }
+
+                itemView.setOnClickListener {
+                    val newFragment = SearchMapFragment()
+                    val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
+                        // Replace whatever is in the fragment_container view with this fragment,
+                        // and add the transaction to the back stack so the user can navigate back
+                        arguments=Bundle().apply {
+                            putString("latlng","${item.lat} ${item.lng}")
+                        }
+                        replace(R.id.search_frame, newFragment)
+                        addToBackStack(null)
+                    }
+                    Log.d("itemView : ","${item.lat} ${item.lng}")
+                    // Commit the transaction
+                    transaction.commit();
                 }
 
             }

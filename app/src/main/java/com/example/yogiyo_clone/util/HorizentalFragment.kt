@@ -1,6 +1,7 @@
 package com.example.yogiyo_clone.util
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yogiyo_clone.R
@@ -22,7 +23,14 @@ class HorizentalFragment(theme: Theme) : BaseFragment<FragmentHorizentalBinding>
         ,Store(20,10,2000,"30-40분",0,"FALSE","메뉴1, 메뉴2",5,"https://t1.daumcdn.net/cfile/tistory/994A334D5D138A8A03",0,"명동칼국수")
         )
         binding.horizontalTitle.text=data.themeName
-        binding.horizontalRecyclerview.adapter=ThemeHorizontalAdapter(str)
+        val themeAdapter=ThemeHorizontalAdapter(str)
+//        themeAdapter.setItemClickListener(object :ThemeHorizontalAdapter.ItemClickListener{
+//            override fun onClick(view: View, position: Int) {
+//                Log.d("hello","clicked")
+//            }
+//
+//        })
+        binding.horizontalRecyclerview.adapter=themeAdapter
 //        binding.horizontalRecyclerview.adapter=ThemeHorizontalAdapter(data.stores)
         binding.horizontalRecyclerview.addItemDecoration(HorizontalRecyclerDecoration(16))
         binding.horizontalRecyclerview.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

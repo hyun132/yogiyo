@@ -1,6 +1,8 @@
 package com.example.yogiyo_clone.util
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.src.main.home.models.Category
 import com.example.yogiyo_clone.src.main.home.models.Store
+import com.example.yogiyo_clone.src.order.OrderActivity
 
 class ThemeHorizontalAdapter(array:List<Store>):RecyclerView.Adapter<ThemeHorizontalAdapter.CategoryViewHolder>() {
 
@@ -19,12 +22,20 @@ class ThemeHorizontalAdapter(array:List<Store>):RecyclerView.Adapter<ThemeHorizo
 
     inner class CategoryViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         @SuppressLint("SetTextI18n")
-        fun bind(item:Store){
+        fun bind(item:Store,position: Int){
             itemView.findViewById<TextView>(R.id.restaurant_name_textview).text=item.title
             itemView.findViewById<TextView>(R.id.review_grade_textview).text="${item.rateAvg}"
             itemView.findViewById<TextView>(R.id.review_number_textview).text="리뷰 ${item.countReview}"
             itemView.findViewById<TextView>(R.id.inform_textview).text=item.deliveryTime.split('~')[0]
             Glide.with(itemView.context).load(item.src).into(itemView.findViewById(R.id.restaurant_imageview))
+
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, OrderActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.putExtra("storeId",position-1)
+                itemView.context.startActivity(intent)
+            }
+
         }
     }
 
@@ -34,7 +45,7 @@ class ThemeHorizontalAdapter(array:List<Store>):RecyclerView.Adapter<ThemeHorizo
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.bind(dataArray[position])
+        holder.bind(dataArray[position],position)
     }
 
     override fun getItemCount(): Int {
@@ -43,16 +54,16 @@ class ThemeHorizontalAdapter(array:List<Store>):RecyclerView.Adapter<ThemeHorizo
 
 
 
-    //클릭 인터페이스 정의
-    interface ItemClickListener {
-        fun onClick(view: View, position: Int)
-    }
-
-    //클릭리스너 선언
-    private lateinit var itemClickListner: ItemClickListener
-
-    //클릭리스너 등록 매소드
-    fun setItemClickListener(itemClickListener: ItemClickListener) {
-        this.itemClickListner = itemClickListener
-    }
+//    //클릭 인터페이스 정의
+//    interface ItemClickListener {
+//        fun onClick(view: View, position: Int)
+//    }
+//
+//    //클릭리스너 선언
+//    private lateinit var itemClickListner: ItemClickListener
+//
+//    //클릭리스너 등록 매소드
+//    fun setItemClickListener(itemClickListener: ItemClickListener) {
+//        this.itemClickListner = itemClickListener
+//    }
 }

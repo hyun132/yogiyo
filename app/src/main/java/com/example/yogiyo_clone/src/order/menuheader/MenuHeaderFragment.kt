@@ -19,7 +19,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import java.text.DecimalFormat
 
 
-class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuHeaderBinding::bind, R.layout.fragment_menu_header),
+class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuHeaderBinding::bind,
+    R.layout.fragment_menu_header),
     MenuHeaderFragmentView {
     lateinit var myViewPagerAdapter:ViewPagerAdapter
 
