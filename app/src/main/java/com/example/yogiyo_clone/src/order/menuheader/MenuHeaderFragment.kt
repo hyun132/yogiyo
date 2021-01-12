@@ -12,9 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentMenuHeaderBinding
-import com.example.yogiyo_clone.src.order.menubottom.DetailFragment
+import com.example.yogiyo_clone.src.order.menubottom.BottomMenuFragment
 import com.example.yogiyo_clone.src.order.menuheader.model.MenuHeaderResponse
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import java.text.DecimalFormat
 
@@ -23,14 +22,16 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
     R.layout.fragment_menu_header),
     MenuHeaderFragmentView {
     lateinit var myViewPagerAdapter:ViewPagerAdapter
-
+    var storeIdx:Int=0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        var idx = arguments?.get("idx")
-        var idx =1
+        arguments?.getInt("storeIdx")?.let {
+            storeIdx=it
+            MenuHeaderService(this).tryLogIn(it)
+            Log.d("idx : ", it.toString())
+        }
 
-        MenuHeaderService(this).tryLogIn(idx)
 
         myViewPagerAdapter = ViewPagerAdapter(requireActivity())
         binding.viewpager.adapter = myViewPagerAdapter
@@ -47,8 +48,15 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
     override fun onGetMenuHeaderSuccess(response: MenuHeaderResponse) {
         Log.d("MenuHeaderFragment : ", "success")
 
-        val poster =response.result.poster.split('|')
-        Glide.with(requireActivity()).load(poster[0]).into(binding.restaurantImageview)
+        if(response.result.poster.isNullOrBlank()){
+            binding.restaurantImageview.visibility=View.GONE
+        }else{
+            val poster= response.result.poster.split('|')
+            Glide.with(requireActivity()).load(poster[0]).into(binding.restaurantImageview)
+        }
+
+        activity?.actionBar?.title=response.result.title
+//        binding.restaurant.text= response.result.title
         binding.restaurantNameTextview.text = response.result.title
         binding.restaurantRatingBar.rating= response.result.rateAvg.toFloat()
         binding.restaurantReviewRate.text=response.result.rateAvg.toString()
@@ -78,14 +86,20 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
 
     }
 
-    class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
+    inner class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
         override fun getItemCount(): Int =3
         override fun createFragment(position: Int): Fragment {
             return when(position){
-                0->DetailFragment()
+                0->{
+                    val fragment = BottomMenuFragment()
+                    fragment.arguments=Bundle().apply {
+                        putInt("storeidx",storeIdx)
+                    }
+                    fragment
+                }
 //                1->NewFragment()  //리뷰
 //                2->BestFragment()  // 정보
-                else->DetailFragment()
+                else->BottomMenuFragment()
             }
         }
 

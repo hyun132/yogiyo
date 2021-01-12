@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/yogiseo_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="요기서 결제 시 할인"
+        android:textSize="10sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/menu_imageview"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/menu_name_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="1"
+        android:text="허니콤보"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/menu_imageview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/yogiseo_discount"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginEnd="4dp"/>
+
+    <TextView
+        android:id="@+id/menu_description_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="미각을 자극하는 땡초갈릭치킨과 기름기 없이 담백한 후라이드까지!"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/menu_imageview"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu_name_textview"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_marginEnd="4dp"/>
+
+    <TextView
+        android:id="@+id/menu_price_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22,500"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/menu_description_textview"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

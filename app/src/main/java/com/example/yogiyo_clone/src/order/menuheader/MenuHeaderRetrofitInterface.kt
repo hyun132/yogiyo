@@ -11,5 +11,4 @@ interface MenuHeaderRetrofitInterface {
         @Path("idx") idx: Int
         ) : Call<MenuHeaderResponse>
 
-
 }

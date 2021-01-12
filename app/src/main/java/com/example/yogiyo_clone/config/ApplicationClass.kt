@@ -29,8 +29,9 @@ class ApplicationClass:Application() {
 
         // JWT Token Header 키 값
         val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        var SAVE_TOKEN=false
 
-        // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
+        // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.`
         lateinit var sRetrofit: Retrofit
 
         var roadAddress= MutableLiveData<String>().apply { postValue("서울특별시 강남구 역삼동 강남대로 438") }
@@ -69,6 +70,16 @@ class ApplicationClass:Application() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+
+        if (!SAVE_TOKEN){
+            val editor = sSharedPreferences.edit()
+            editor.remove(X_ACCESS_TOKEN)
+            editor.apply()
+        }
     }
 
 }

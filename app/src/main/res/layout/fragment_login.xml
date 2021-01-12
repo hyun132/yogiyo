@@ -166,7 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="요기요가 처음이신가요?"
-        android:textColor="@color/light_gray"
+        android:textColor="@color/standard_gray"
         app:layout_constraintEnd_toStartOf="@+id/login_signup_btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

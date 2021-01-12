@@ -11,11 +11,16 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(ActivityOrderBinding::i
 //        window.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY)
         super.onCreate(savedInstanceState)
 
+        val storeidx=intent.getIntExtra("storeId",0)
+
         val newFragment = MenuHeaderFragment()
 
         val transaction = this.supportFragmentManager.beginTransaction().apply {
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack so the user can navigate back
+            newFragment.arguments = Bundle().apply {
+                putInt("storeIdx",storeidx)
+            }
             replace(R.id.order_frame, newFragment)
             addToBackStack(null)
         }

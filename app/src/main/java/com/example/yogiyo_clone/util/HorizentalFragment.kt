@@ -23,7 +23,7 @@ class HorizentalFragment(theme: Theme) : BaseFragment<FragmentHorizentalBinding>
         ,Store(20,10,2000,"30-40분",0,"FALSE","메뉴1, 메뉴2",5,"https://t1.daumcdn.net/cfile/tistory/994A334D5D138A8A03",0,"명동칼국수")
         )
         binding.horizontalTitle.text=data.themeName
-        val themeAdapter=ThemeHorizontalAdapter(str)
+        val themeAdapter=ThemeHorizontalAdapter(data.stores)
 //        themeAdapter.setItemClickListener(object :ThemeHorizontalAdapter.ItemClickListener{
 //            override fun onClick(view: View, position: Int) {
 //                Log.d("hello","clicked")

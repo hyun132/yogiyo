@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentHomeBinding
+import com.example.yogiyo_clone.src.login.LoginActivity
 import com.example.yogiyo_clone.src.main.home.models.Category
 import com.example.yogiyo_clone.src.main.home.models.HomeResponse
 import com.example.yogiyo_clone.src.searchaddress.SearchAddressMainActivity
@@ -52,26 +53,6 @@ class HomeFragment :
                 Log.d("home : ","item clicked")
             }
         })
-//        cateogoryAdapter.setItemClickListener(object :HomeCategoryAdapter.ItemClickListener{
-//            override fun onClick(view: View, position: Int) {
-//                Log.d("categoryId", position.toString())
-//                val newFragment = CategoryContainerFragment()
-////                val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
-////                    // Replace whatever is in the fragment_container view with this fragment,
-////                    // and add the transaction to the back stack so the user can navigate back
-////
-////                    addToBackStack(null)
-////                    arguments=Bundle().apply {  putInt("categoryId",position)}
-////
-////                    newFragment.arguments=arguments
-////
-////                    replace(R.id.main_frm, newFragment)
-////                }
-////                // Commit the transaction
-////                transaction.commit();
-//            }
-//
-//        })
 
         binding.categoryRecyclerview.layoutManager =
             GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
@@ -93,7 +74,7 @@ class HomeFragment :
 
     override fun onGetHomeInfoSuccess(response: HomeResponse) {
 
-        binding.addressButton.text = "${response.result.address}▾"
+        binding.addressButton.text = "${response.result.address} ▾"
         val newFragment = HorizentalFragment(response.result.themes[0])
         val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
             // Replace whatever is in the fragment_container view with this fragment,
@@ -106,7 +87,9 @@ class HomeFragment :
     }
 
     override fun onGetHomeInfoFailure(message: String) {
-        Log.d("getHomeInfo : ", "fail")
+        val intent = Intent(activity,LoginActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
 

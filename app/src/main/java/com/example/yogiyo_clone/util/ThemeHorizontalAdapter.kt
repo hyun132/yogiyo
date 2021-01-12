@@ -27,12 +27,12 @@ class ThemeHorizontalAdapter(array:List<Store>):RecyclerView.Adapter<ThemeHorizo
             itemView.findViewById<TextView>(R.id.review_grade_textview).text="${item.rateAvg}"
             itemView.findViewById<TextView>(R.id.review_number_textview).text="리뷰 ${item.countReview}"
             itemView.findViewById<TextView>(R.id.inform_textview).text=item.deliveryTime.split('~')[0]
-            Glide.with(itemView.context).load(item.src).into(itemView.findViewById(R.id.restaurant_imageview))
+            Glide.with(itemView.context).load(item.src).centerCrop().into(itemView.findViewById(R.id.restaurant_imageview))
 
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, OrderActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("storeId",position-1)
+                intent.putExtra("storeId",item.storeIdx)
                 itemView.context.startActivity(intent)
             }
 

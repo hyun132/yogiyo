@@ -10,11 +10,18 @@ import retrofit2.Response
 
 class HomeService(val view: HomeFragmentView) { // 얘는 이전에 repository랑 비슷한 역할
 
-    fun tryGetHomeInfo(){
-        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-        homeRetrofitInterface.getHomeInfo().enqueue(object : Callback<HomeResponse>{
+    fun tryGetHomeInfo() {
+        val homeRetrofitInterface =
+            ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+        homeRetrofitInterface.getHomeInfo().enqueue(object : Callback<HomeResponse> {
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
-                response.body()?.let { view.onGetHomeInfoSuccess(it) }
+
+                response.body()?.let {
+                    if (it.code == 1000) {
+                        view.onGetHomeInfoSuccess(it)
+                    } else
+                        view.onGetHomeInfoFailure(it.message)
+                }
             }
 
             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {
