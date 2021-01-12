@@ -51,6 +51,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/white"/>
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/category_recyclerview"
                 android:layout_width="match_parent"

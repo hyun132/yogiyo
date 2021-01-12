@@ -66,6 +66,8 @@ SearchTextAddressFragmentView {
             }
             // Commit the transaction
             transaction.commit();
+
+
         }
     }
 
@@ -93,15 +95,17 @@ SearchTextAddressFragmentView {
 
                 itemView.setOnClickListener {
                     val newFragment = SearchMapFragment()
+                    newFragment.arguments=Bundle().apply {
+                        putString("latlng","${item.lat} ${item.lng}")
+                    }
                     val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
                         // Replace whatever is in the fragment_container view with this fragment,
                         // and add the transaction to the back stack so the user can navigate back
-                        arguments=Bundle().apply {
-                            putString("latlng","${item.lat} ${item.lng}")
-                        }
+
                         replace(R.id.search_frame, newFragment)
                         addToBackStack(null)
                     }
+
                     Log.d("itemView : ","${item.lat} ${item.lng}")
                     // Commit the transaction
                     transaction.commit();

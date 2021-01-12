@@ -1,36 +1,30 @@
-package com.example.yogiyo_clone.util
+package com.example.yogiyo_clone.src.order.menu.review
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yogiyo_clone.R
-import com.example.yogiyo_clone.src.main.home.models.Store
-import com.example.yogiyo_clone.src.order.OrderActivity
+import com.example.yogiyo_clone.src.order.menu.review.models.Photo
 
-class ThemeHorizontalAdapter(array:List<Store>):RecyclerView.Adapter<ThemeHorizontalAdapter.CategoryViewHolder>() {
+class ReviewImageHorizontalAdapter(array:List<Photo>):RecyclerView.Adapter<ReviewImageHorizontalAdapter.CategoryViewHolder>() {
 
     var dataArray = array
 
     inner class CategoryViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         @SuppressLint("SetTextI18n")
-        fun bind(item:Store,position: Int){
-            itemView.findViewById<TextView>(R.id.restaurant_name_textview).text=item.title
-            itemView.findViewById<TextView>(R.id.review_grade_textview).text="${item.rateAvg}"
-            itemView.findViewById<TextView>(R.id.review_number_textview).text="리뷰 ${item.countReview}"
-            itemView.findViewById<TextView>(R.id.inform_textview).text=item.deliveryTime.split('~')[0]
+        fun bind(item:Photo,position: Int){
+//            itemView.findViewById<TextView>(R.id.restaurant_name_textview).text=item.title
             Glide.with(itemView.context).load(item.src).centerCrop().into(itemView.findViewById(R.id.restaurant_imageview))
 
-
-            itemView.setOnClickListener {
-                val intent = Intent(itemView.context, OrderActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("storeId",item.storeIdx)
-                itemView.context.startActivity(intent)
-            }
+//
+//            itemView.setOnClickListener {
+//                val intent = Intent(itemView.context, OrderActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                intent.putExtra("storeId",item.storeIdx)
+//                itemView.context.startActivity(intent)
+//            }
 
         }
     }

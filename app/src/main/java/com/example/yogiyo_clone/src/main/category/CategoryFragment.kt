@@ -1,6 +1,5 @@
 package com.example.yogiyo_clone.src.main.category
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,9 +9,6 @@ import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentCategoryContainerBinding
 import com.example.yogiyo_clone.src.main.category.models.CategoryRequest
 import com.example.yogiyo_clone.src.main.category.models.CategoryResult
-import com.example.yogiyo_clone.src.order.OrderActivity
-import com.example.yogiyo_clone.src.order.menuheader.MenuHeaderFragment
-import com.example.yogiyo_clone.util.HorizentalFragment
 import com.example.yogiyo_clone.util.VerticalAdapter
 import com.google.android.material.tabs.TabLayout
 

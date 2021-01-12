@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".src.order.menubottom.BottomMenuFragment">
+    tools:context=".src.order.menu.menubottom.BottomMenuFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menu_horizental_recyclerview"
@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal"
-        android:padding="16dp"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menu_expandable_recyclerview"
@@ -25,7 +26,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/menu_horizental_recyclerview"
         android:orientation="horizontal"
-        android:padding="16dp"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

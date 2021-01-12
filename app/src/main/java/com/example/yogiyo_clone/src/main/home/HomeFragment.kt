@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentHomeBinding
-import com.example.yogiyo_clone.src.login.LoginActivity
 import com.example.yogiyo_clone.src.main.home.models.Category
 import com.example.yogiyo_clone.src.main.home.models.HomeResponse
 import com.example.yogiyo_clone.src.searchaddress.SearchAddressMainActivity
@@ -75,7 +74,11 @@ class HomeFragment :
     override fun onGetHomeInfoSuccess(response: HomeResponse) {
 
         binding.addressButton.text = "${response.result.address} ▾"
-        val newFragment = HorizentalFragment(response.result.themes[0])
+        val newFragment = HorizentalFragment()
+        newFragment.arguments=Bundle().apply {
+            putSerializable("theme",response.result.themes[0])
+        }
+//        newFragment.data=
         val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack so the user can navigate back
@@ -87,9 +90,9 @@ class HomeFragment :
     }
 
     override fun onGetHomeInfoFailure(message: String) {
-        val intent = Intent(activity,LoginActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
+//        val intent = Intent(activity,LoginActivity::class.java)
+//        startActivity(intent)
+//        activity?.finish()
     }
 
 

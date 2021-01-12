@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".src.order.menu.review.BottomReviewFragment"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/total_reivew_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="4.6"
+            android:textSize="50dp"
+            app:layout_constraintEnd_toStartOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/total_review_ratingbar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:secondaryProgressTint="@android:color/white"
+            android:progressTint="@color/yellow"
+            android:rating="0"
+            android:stepSize="0.1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/total_reivew_textview"
+            app:layout_constraintStart_toStartOf="@+id/total_reivew_textview"
+            app:layout_constraintTop_toBottomOf="@id/total_reivew_textview" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/taste_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="맛"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RatingBar
+            android:id="@+id/taste_review_ratingbar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:numStars="5"
+            android:secondaryProgressTint="@android:color/white"
+            android:progressTint="@color/yellow"
+            android:rating="0"
+            android:stepSize="0.1"
+            app:layout_constraintBottom_toBottomOf="@+id/taste_label"
+            app:layout_constraintStart_toEndOf="@+id/taste_label"
+            app:layout_constraintTop_toTopOf="@+id/taste_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="4.6"
+            android:textColor="@color/yellow"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/taste_review_ratingbar"
+            app:layout_constraintStart_toEndOf="@+id/taste_review_ratingbar"
+            app:layout_constraintTop_toTopOf="@+id/taste_review_ratingbar" />
+
+        <TextView
+            android:id="@+id/amount_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="양"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/taste_label" />
+
+        <RatingBar
+            android:id="@+id/amount_review_ratingbar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:numStars="5"
+            android:secondaryProgressTint="@android:color/white"
+            android:progressTint="@color/yellow"
+            android:rating="0"
+            android:stepSize="0.1"
+            app:layout_constraintBottom_toBottomOf="@+id/amount_label"
+            app:layout_constraintStart_toEndOf="@+id/amount_label"
+            app:layout_constraintTop_toTopOf="@+id/amount_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="4.6"
+            android:textColor="@color/yellow"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/amount_review_ratingbar"
+            app:layout_constraintStart_toEndOf="@+id/amount_review_ratingbar"
+            app:layout_constraintTop_toTopOf="@+id/amount_review_ratingbar" />
+
+        <TextView
+            android:id="@+id/delivery_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="배달"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/amount_label" />
+
+        <RatingBar
+            android:id="@+id/delivery_review_ratingbar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:numStars="5"
+            android:secondaryProgressTint="@android:color/white"
+            android:progressTint="@color/yellow"
+            android:rating="0"
+            android:stepSize="0.1"
+            app:layout_constraintBottom_toBottomOf="@+id/delivery_label"
+            app:layout_constraintStart_toEndOf="@+id/delivery_label"
+            app:layout_constraintTop_toTopOf="@+id/delivery_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="4.6"
+            android:textColor="@color/yellow"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/delivery_review_ratingbar"
+            app:layout_constraintStart_toEndOf="@+id/delivery_review_ratingbar"
+            app:layout_constraintTop_toTopOf="@+id/delivery_review_ratingbar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingStart="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+
+        <TextView
+            android:id="@+id/photo_review_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="사진리뷰"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/photo_review_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="970"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/photo_review_label"
+            app:layout_constraintStart_toEndOf="@id/photo_review_label"
+            app:layout_constraintTop_toTopOf="@+id/photo_review_label" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/review_image_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/photo_review_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
+
+        <TextView
+            android:id="@+id/total_review_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="리뷰"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/total_review_number_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="970"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/total_review_label"
+            app:layout_constraintStart_toEndOf="@id/total_review_label"
+            app:layout_constraintTop_toTopOf="@+id/total_review_label" />
+
+        <TextView
+            android:id="@+id/chef_reply_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="리뷰"
+            app:layout_constraintStart_toEndOf="@+id/total_review_number_textview"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/chef_reply_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="970"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/total_review_label"
+            app:layout_constraintStart_toEndOf="@id/chef_reply_label"
+            app:layout_constraintTop_toTopOf="@+id/total_review_label"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/review_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/total_review_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.BaseActivity
 import com.example.yogiyo_clone.databinding.ActivityOrderBinding
-import com.example.yogiyo_clone.src.order.menuheader.MenuHeaderFragment
+import com.example.yogiyo_clone.src.order.menu.menuheader.MenuHeaderFragment
 
 class OrderActivity : BaseActivity<ActivityOrderBinding>(ActivityOrderBinding::inflate){
     override fun onCreate(savedInstanceState: Bundle?) {

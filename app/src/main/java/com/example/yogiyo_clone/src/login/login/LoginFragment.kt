@@ -72,17 +72,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::b
     override fun onPostLogInSuccess(logInResult:LogInResult) {
         val token=logInResult.jwt
         val pref = requireActivity().getSharedPreferences(X_ACCESS_TOKEN, Application.MODE_PRIVATE)
-        pref.edit().putString(X_ACCESS_TOKEN,token).apply()
+        pref.edit().putString(X_ACCESS_TOKEN,token).commit()
         Log.d("LoginFragment","로그인성공")
         Log.d("sharedPreference",token)
         Toast.makeText(context, "로그인성공", Toast.LENGTH_SHORT).show()
-
-        var intent = Intent(this.activity,MainActivity::class.java)
-        startActivity(intent)
         if(binding.autoLoginCheckbox.isChecked){
             SAVE_TOKEN=true
         }
-        activity?.finish()
+        var intent = Intent(this.activity,MainActivity::class.java)
+        startActivity(intent)
+
+//        activity?.finish()
     }
 
     override fun onPostLogInFailure(message: String) {

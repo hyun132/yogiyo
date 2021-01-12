@@ -25,16 +25,16 @@ class SearchMapFragment : BaseFragment<FragmentSearchMapBinding>(FragmentSearchM
         super.onViewCreated(view, savedInstanceState)
 
         val newFragment = MapsFragment()
-
-
+        val arg = arguments?.getString("latlng")
+        Log.d("SearchMapFragment : ", "arg : ${arguments?.getString("latlng")}")
+        newFragment.arguments=Bundle().apply {
+            putString("latlng",arg)
+        }
         val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
             // Replace whatever is in the fragment_container view with this fragment,
             // and add the transaction to the back stack so the user can navigate back
-            val arg = arguments?.getString("latlng")
-            Log.d("SearchMapFragment : ", "arg : ${arguments?.getString("latlng")}")
-            arguments=Bundle().apply {
-                putString("latlng",arg)
-            }
+
+
 
             replace(R.id.map_frame, newFragment)
             addToBackStack(null)
@@ -59,6 +59,8 @@ class SearchMapFragment : BaseFragment<FragmentSearchMapBinding>(FragmentSearchM
 
     override fun onPostSetMapAddressSuccess(setAddressResponse: SetAddressResponse) {
         Log.d("SetMapAddress : ", "success")
+
+
         activity?.finish()
     }
 

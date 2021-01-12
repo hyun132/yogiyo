@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".src.order.menuheader.MenuHeaderFragment">
+    tools:context=".src.order.menu.menuheader.MenuHeaderFragment">
 
 
     <com.amar.library.ui.StickyScrollView
@@ -286,7 +286,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/chef_notice_label"
+                android:id="@+id/chef_reply_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="사장님알림"
@@ -300,12 +300,12 @@
                 android:layout_height="wrap_content"
                 android:text="더보기 〉"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/chef_notice_label"
+                app:layout_constraintBottom_toBottomOf="@+id/chef_reply_time"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/chef_notice_label" />
+                app:layout_constraintTop_toTopOf="@+id/chef_reply_time" />
 
             <TextView
-                android:id="@+id/chef_notice"
+                android:id="@+id/chef_reply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

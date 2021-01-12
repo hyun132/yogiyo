@@ -17,11 +17,8 @@ class HomeService(val view: HomeFragmentView) { // 얘는 이전에 repository�
             override fun onResponse(call: Call<HomeResponse>, response: Response<HomeResponse>) {
 
                 response.body()?.let {
-                    if (it.code == 1000) {
-                        view.onGetHomeInfoSuccess(it)
-                    } else
-                        view.onGetHomeInfoFailure(it.message)
-                }
+                        view.onGetHomeInfoSuccess(it)}
+
             }
 
             override fun onFailure(call: Call<HomeResponse>, t: Throwable) {

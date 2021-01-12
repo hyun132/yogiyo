@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface SignUpInfoRetrofitInterface {
 
 
-    @POST("/user/info")
+    @POST("/valid-userinfo")
     fun getUserValidation(@Body params: PostUserValidationRequest) : Call<PostUserValicationResponse>
 
 
