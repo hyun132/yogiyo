@@ -1,19 +1,21 @@
-package com.example.yogiyo_clone.src.main.home.models
+package com.example.yogiyo_clone.src.main.search.models.storesearch
 
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 data class Store(
-    val countLike: Int,
+    val cesco: String,
+    val countOwnerComment: Int,
     val countReview: Int,
     val deliveryCharge: Int,
     val deliveryTime: String,
     val discountCharge: Int,
+    val great: String,
+    val icon: String,
     val isExpress: String,
+    val limitCharge: Int,
     val menus: String,
-    val rateAvg: Float?,
-    val src: String?,
     val storeIdx: Int,
-    val title: String
-):Serializable
+    val title: String,
+    val totalRate: Any
+)

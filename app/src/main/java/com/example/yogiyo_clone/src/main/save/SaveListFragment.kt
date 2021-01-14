@@ -36,6 +36,7 @@ class SaveListFragment : BaseFragment<FragmentSaveListBinding>(
         val adapter = ListViewAdapter(result.stores.toMutableList())
         adapter.notifyDataSetChanged()
         binding.savelistListview.adapter = adapter
+        binding.saveItemCount.text=result.countStroe.toString()
     }
 
     override fun onGetSaveListFailure(message: String) {
@@ -47,7 +48,7 @@ class SaveListFragment : BaseFragment<FragmentSaveListBinding>(
         override fun getItem(position: Int): Store = items[position]
         override fun getItemId(position: Int): Long = position.toLong()
 
-        @SuppressLint("SetTextI18n", "ResourceAsColor", "ViewHolder")
+        @SuppressLint("SetTextI18n", "ResourceAsColor", "ViewHolder", "ResourceType")
         override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
             this.notifyDataSetChanged()
             var convertView = view
@@ -58,11 +59,11 @@ class SaveListFragment : BaseFragment<FragmentSaveListBinding>(
                 Glide.with(this@SaveListFragment).load(item.icon).into(convertView.findViewById<ImageView>(R.id.restaurant_imageview))
                 convertView.findViewById<TextView>(R.id.restaurant_name_textview).text = item.title
                 convertView.findViewById<TextView>(R.id.review_grade_textview).text = item.rateAvg.toString()
-                convertView.findViewById<TextView>(R.id.review_number_textview).text = item.countReview.toString()
+                convertView.findViewById<TextView>(R.id.review_number_textview).text = "리뷰 ${item.countReview}"
                 convertView.findViewById<TextView>(R.id.represent_discount_textview).visibility = View.GONE
                 convertView.findViewById<TextView>(R.id.deliver_fee).text = item.menus
                 convertView.findViewById<ImageView>(R.id.save_image_imageview).visibility = View.VISIBLE
-                Glide.with(this@SaveListFragment).load(item.icon).into(convertView.findViewById<ImageView>(R.id.save_image_imageview))
+                Glide.with(this@SaveListFragment).load(R.drawable.ic_jjimed).into(convertView.findViewById<ImageView>(R.id.save_image_imageview))
 
             }
 

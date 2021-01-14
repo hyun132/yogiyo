@@ -1,9 +1,8 @@
 package com.example.yogiyo_clone.src.main.home
 
-import android.location.Location
 import com.example.yogiyo_clone.config.ApplicationClass
 import com.example.yogiyo_clone.src.main.home.models.HomeResponse
-import kotlinx.coroutines.flow.combine
+import com.example.yogiyo_clone.src.main.home.models.bottom.BottomRecommandResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,30 +26,22 @@ class HomeService(val view: HomeFragmentView) { // 얘는 이전에 repository�
         })
     }
 
-//    fun tryGetCategories(loc:Location){
-//        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//        homeRetrofitInterface.getElses().enqueue(object : Callback<ElseResponse>{
-//            override fun onResponse(call: Call<ElseResponse>, response: Response<ElseResponse>) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onFailure(call: Call<ElseResponse>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//    }
-//
-//    fun tryGetElse(loc:Location){
-//        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
-//        homeRetrofitInterface.getElses().enqueue(object : Callback<ElseResponse>{
-//            override fun onResponse(call: Call<ElseResponse>, response: Response<ElseResponse>) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onFailure(call: Call<ElseResponse>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//    }
+    fun tryGetHomeBottomRecommand() {
+        val homeRetrofitInterface =
+            ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+        homeRetrofitInterface.getHomeBottomRecommend().enqueue(object : Callback<BottomRecommandResponse> {
+            override fun onResponse(
+                call: Call<BottomRecommandResponse>,
+                response: Response<BottomRecommandResponse>
+            ) {
+                response.body()?.let { view.onGetBottomRecommadSuccess(it) }
+            }
+
+            override fun onFailure(call: Call<BottomRecommandResponse>, t: Throwable) {
+                t.message?.let { view.onGetBottomRecommadFailure(it) }
+            }
+
+        })
+    }
 
 }

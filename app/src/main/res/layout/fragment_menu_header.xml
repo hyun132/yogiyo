@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".src.order.menu.menuheader.MenuHeaderFragment">
-
-
+    <include
+        android:id="@+id/standard_header_toolbar"
+        layout="@layout/standard_toolbar" />
     <com.amar.library.ui.StickyScrollView
         android:id="@+id/sticky_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layout_constraintTop_toTopOf="parent"
         app:stickyHeader="@id/tablayout">
 
@@ -28,7 +30,7 @@
             android:layout_height="200dp"
             android:contentDescription="이게뭐죠"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@color/white"
             app:layout_collapseMode="parallax"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="BHC-군포금정역점"
+                android:text="가게이름"
                 android:textColor="@color/black"
                 android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="4.8"
+                android:text="0.0"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -137,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="배달예상시간 60~70분"
+                android:text="배달예상시간 없음"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="15,000원"
+                android:text="없음"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -261,7 +263,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="3000원"
+                android:text="없음"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -340,18 +342,20 @@
                 app:layout_constraintEnd_toStartOf="@+id/jjim_textview"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:clickable="false"/>
 
             <TextView
                 android:id="@+id/jjim_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="찜 421"
+                android:text="찜 0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/jjim_icon"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:clickable="false"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -420,4 +424,30 @@
     </com.amar.library.ui.StickyScrollView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/bottom_button_area"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/order_by_call_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="전화주문"
+            android:textColor="@color/white"
+            android:background="#BD1B06"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/order_by_call_touch"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="터치주문"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@color/signature"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    </LinearLayout>

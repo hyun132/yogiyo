@@ -81,6 +81,10 @@ CategoryFragmentView{
             }
 
         })
+        var buttomSheet = BottomSheet()
+        binding.filterArea.setOnClickListener {
+            activity?.supportFragmentManager?.let { it1 -> buttomSheet.show(it1,buttomSheet.tag) }
+        }
 
     }
 

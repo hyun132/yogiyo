@@ -36,20 +36,6 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_menu, menu);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when(item.itemId){
-            R.id.action_search -> Log.d("actionbar","search icon clicked")
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +45,7 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
 
 //         fragment = inflater.inflate(R.layout.fragment_menu_header, container, false);
         fragment = super.onCreateView(inflater, container, savedInstanceState)!!
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
 
         return fragment;
     }
@@ -86,7 +72,7 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
             tab.text=tabLayoutTextArray[position]
         }.attach()
 
-        binding.jjimTextview.setOnClickListener {
+        binding.jjimContainer.setOnClickListener {
             //찜 눌렀을 때 처리
             Log.d("jjim : ","Clicked")
             MenuHeaderService(this).tryJjim(storeIdx)
@@ -98,6 +84,8 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
     override fun onGetMenuHeaderSuccess(response: MenuHeaderResponse) {
         Log.d("MenuHeaderFragment : ", "success")
 
+//        binding.standardHeaderToolbar.standardActionTitle.text = response.result.title
+
         currentStore=response.result
 
         if(response.result.poster.isNullOrBlank()){
@@ -107,24 +95,29 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
             Glide.with(requireActivity()).load(poster[0]).into(binding.restaurantImageview)
         }
 
-        activity?.actionBar?.title=response.result.title
+//        activity?.actionBar?.title=response.result.title
 //        binding.restaurant.text= response.result.title
         binding.restaurantNameTextview.text = response.result.title
-        binding.restaurantRatingBar.rating= response.result.rateAvg.toFloat()
-        binding.restaurantReviewRate.text=response.result.rateAvg.toString()
+        val avg:Float= currentStore!!.rateAvg?.toFloat() ?:0F
+        binding.restaurantRatingBar.rating= avg
+        if (currentStore!!.rateAvg!=null){
+            binding.restaurantReviewRate.text=response.result.rateAvg.toString()
+        }
+
         if(response.result.discountCharge==0){
             binding.restaurantDiscountTextview.isGone=true
         }else{
-            binding.restaurantDiscountTextview.text="${addComma(response.result.discountCharge)}원 할인"
+            binding.restaurantDiscountTextview.text="${response.result.discountCharge?.let { addComma(it) }}원 할인"
         }
         binding.restaurantEstimatedTimeTextview.text="배달예상시간 ${response.result.deliveryTime}"
-        binding.minimumOrderPrice.text="${addComma(response.result.limitCharge)}원"
+        binding.minimumOrderPrice.text="${response.result.limitCharge?.let { addComma(it) }}원"
         binding.payMethod.text=response.result.paymentSystem
-        binding.deliveryFee.text="${addComma(response.result.deliveryCharge)}원"
+        binding.deliveryFee.text="${response.result.deliveryCharge?.let { addComma(it) }}원"
         binding.chefReply.text= response.result.description?.toString()
+        if(response.result.isLike=="true"){
+            Glide.with(this).load(R.drawable.ic_jjimed).into(binding.jjimIcon)
+        }
         binding.jjimTextview.text="찜 ${response.result.countLike}"
-
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title = response.result.title
 
     }
 
@@ -134,7 +127,14 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
     }
 
     override fun onPostJjimSuccess(response: JjimResponse) {
-        Glide.with(this).load(R.drawable.ic_jjimed).into(binding.jjimIcon)
+        if(response.code==1000){
+            Glide.with(this).load(R.drawable.ic_jjimed).into(binding.jjimIcon)
+            binding.jjimTextview.text=( Integer.parseInt(binding.jjimTextview.text.toString()) + 1).toString()
+        }else if(response.code==1001){
+            Glide.with(this).load(R.drawable.ic_jjim).into(binding.jjimIcon)
+            binding.jjimTextview.text=(Integer.parseInt(binding.jjimTextview.text.toString()) -1).toString()
+        }
+
     }
 
     override fun onPostJjimFailure(message: String) {

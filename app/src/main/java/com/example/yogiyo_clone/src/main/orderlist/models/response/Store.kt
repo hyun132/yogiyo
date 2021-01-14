@@ -13,7 +13,7 @@ data class Store(
     val isExpress: String?,
     val isSuperRedweek: String?,
     val limitCharge: Int,
-    val rateAvg: Int?,
+    val rateAvg: Float?,
     val storeIdx: Int,
     val title: String
 )

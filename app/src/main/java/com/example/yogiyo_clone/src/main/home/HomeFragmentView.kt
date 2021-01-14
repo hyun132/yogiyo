@@ -1,6 +1,7 @@
 package com.example.yogiyo_clone.src.main.home
 
 import com.example.yogiyo_clone.src.main.home.models.HomeResponse
+import com.example.yogiyo_clone.src.main.home.models.bottom.BottomRecommandResponse
 
 interface HomeFragmentView {
 
@@ -8,7 +9,7 @@ interface HomeFragmentView {
 
     fun onGetHomeInfoFailure(message: String)
 
-//    fun onPostSignUpSuccess(response: SignUpResponse)
-//
-//    fun onPostSignUpFailure(message: String)
+    fun onGetBottomRecommadSuccess(response: BottomRecommandResponse)
+
+    fun onGetBottomRecommadFailure(message: String)
 }

@@ -22,7 +22,7 @@
         android:theme="@style/Theme.Design.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".src.order.OrderActivity"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:theme="@style/Theme.Design.Light.NoActionBar">
         </activity>
 
         <meta-data

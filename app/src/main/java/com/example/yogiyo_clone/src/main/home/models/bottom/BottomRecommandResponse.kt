@@ -1,9 +1,11 @@
 package com.example.yogiyo_clone.src.main.home.models.bottom
 
 
-data class RecommandResponse(
+import com.google.gson.annotations.SerializedName
+
+data class BottomRecommandResponse(
     val code: Int,
     val isSuccess: Boolean,
     val message: String,
-    val recommandResult: List<RecommandResult>
+    val result: List<Result>?
 )

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/close_dialog_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/close" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="필터"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/init_dialog_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="초기화"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <RadioGroup
+        android:id="@+id/sort_group"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/square_border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toStartOf="@+id/payment_group"
+        android:paddingStart="16dp">
+
+        <RadioButton
+            android:id="@+id/yogiyo_rank_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="요기요 랭킹순"
+            android:textColor="@color/dark_gray"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/delivery_fee_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="배달요금순"
+            android:textColor="@color/dark_gray" />
+
+        <RadioButton
+            android:id="@+id/review_score_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="별점순"
+            android:textColor="@color/dark_gray" />
+        <RadioButton
+            android:id="@+id/review_count_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="리뷰많은순"
+            android:textColor="@color/dark_gray" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/payment_group"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/square_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sort_group"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        android:paddingStart="16dp">
+
+        <RadioButton
+            android:id="@+id/default_payment_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="결제수단 전체"
+            android:checked="true"
+            android:textColor="@color/dark_gray" />
+
+        <RadioButton
+            android:id="@+id/cash_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="현금"
+            android:textColor="@color/dark_gray" />
+
+        <RadioButton
+            android:id="@+id/mee_and_card_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="현장카드"
+            android:textColor="@color/dark_gray" />
+
+        <RadioButton
+            android:id="@+id/yogiseo_pay_radiobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_selector"
+            android:buttonTint="@color/signature"
+            android:text="요기서결제"
+            android:textColor="@color/dark_gray" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/signature"
+        android:gravity="center"
+        android:text="적용"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sort_group" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

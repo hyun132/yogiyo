@@ -1,7 +1,7 @@
 package com.example.yogiyo_clone.src.main.orderlist
 
 import com.example.yogiyo_clone.config.ApplicationClass
-import com.example.yogiyo_clone.src.main.orderlist.models.history.OrderHistoryResponse
+import com.example.yogiyo_clone.src.main.orderlist.models.history.HistoryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,15 +10,15 @@ class OrderListService(val view: OrderListFragment) { // 얘는 이전에 reposi
 
     fun tryGetOrderList(type:Int){
         val homeRetrofitInterface = ApplicationClass.sRetrofit.create(OrderListRetrofitInterface::class.java)
-        homeRetrofitInterface.getOrderList().enqueue(object : Callback<OrderHistoryResponse>{
+        homeRetrofitInterface.getOrderList().enqueue(object : Callback<HistoryResponse>{
             override fun onResponse(
-                call: Call<OrderHistoryResponse>,
-                response: Response<OrderHistoryResponse>
+                call: Call<HistoryResponse>,
+                response: Response<HistoryResponse>
             ) {
-                response.body()?.historyResult?.let { view.onGetOrderListSuccess(it) }
+                response.body()?.let { view.onGetOrderListSuccess(it) }
             }
 
-            override fun onFailure(call: Call<OrderHistoryResponse>, t: Throwable) {
+            override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
                 t.message?.let { view.onGetOrderListFailure(it) }
             }
 

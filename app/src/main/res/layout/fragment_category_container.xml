@@ -35,19 +35,20 @@
             android:orientation="horizontal"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:paddingEnd="8dp">
+            android:paddingEnd="8dp"
+            android:gravity="right">
 
-            <CheckBox
-                android:id="@+id/express_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/express_checkbox"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="익스프레스"
-                android:textColor="@color/black" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="익스프레스"-->
+<!--                android:textColor="@color/black" />-->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -56,11 +57,13 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:background="@drawable/square_border"
-                android:backgroundTint="@color/white">
+                android:backgroundTint="@color/white"
+                android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/category_filter_button"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginEnd="4dp"
                     android:src="@drawable/ic_setting"
                     android:padding="2dp"/>
@@ -79,7 +82,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:background="@color/white">
 
             <TextView
@@ -87,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="슈퍼레드위크 추천"
                 android:layout_marginBottom="8dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -99,7 +106,10 @@
             android:id="@+id/yogiyo_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:orientation="vertical"
             android:background="@color/white">
 
@@ -108,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="요기요 등록 음식점점"
                 android:layout_marginBottom="8dp"
+                android:textColor="@color/black"
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView

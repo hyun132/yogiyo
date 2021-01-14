@@ -28,7 +28,6 @@ class MenuDetailFragment : BaseFragment<FragmentMenuDetailBinding>(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

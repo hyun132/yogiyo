@@ -7,13 +7,13 @@ data class Store(
     val countOwnerComment: Int,
     val countReview: Int,
     val deliveryCharge: Int,
-    val deliveryTime: String,
+    val deliveryTime: String?,
     val discountCharge: Int,
     val icon: String?,
-    val isExpress: String,
-    val isSuperRedweek: String,
+    val isExpress: String?,
+    val isSuperRedweek: String?,
     val limitCharge: Int,
-    val rateAvg: Int,
+    val rateAvg: Float?,
     val storeIdx: Int,
     val title: String
 )
