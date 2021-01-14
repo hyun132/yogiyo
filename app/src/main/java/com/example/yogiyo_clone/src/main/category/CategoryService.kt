@@ -18,7 +18,7 @@ class CategoryService(val view: CategoryFragment) { // 얘는 이전에 reposito
                     call: Call<CategoryResponse>,
                     response: Response<CategoryResponse>
                 ) {
-                    response.body()?.let { view.onCategoryInfoSuccess(it.result) }
+                    response.body()?.let { it.result?.let { it1 -> view.onCategoryInfoSuccess(it1) } }
                     Log.d("onResponse : ", "success")
                 }
 

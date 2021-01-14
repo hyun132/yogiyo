@@ -29,11 +29,9 @@ class MyYogiyoFragment : BaseFragment<FragmentMyYogiyoBinding>(FragmentMyYogiyoB
     }
 
     override fun onGetUserInfoSuccess(response: UserResponse) {
-        TODO("Not yet implemented")
     }
 
     override fun onGetUserInfoFailure(message: String) {
-        TODO("Not yet implemented")
     }
 
 

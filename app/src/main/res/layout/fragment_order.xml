@@ -4,13 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".src.order.pay.PayFragment">
+    tools:context=".src.order.orderfood.OrderFragment">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/nested_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="45dp"
+        android:paddingStart="8dp">
+
+        <ImageView
+            android:id="@+id/toolbar_backbutton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="배달 주문 결제"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <View
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scrollview"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="1"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,13 +65,13 @@
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:textSize="16sp"
                     android:background="@drawable/circle_background"
                     android:gravity="center"
                     android:text="1"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +83,7 @@
                     android:layout_marginStart="8dp"
                     android:text="주문자 정보"
                     android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView6"
                     app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -68,17 +108,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20sp"
                     android:text="경기도 군포시 금정동 234-56"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/road_address_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="[도로명] 도로이름 123번길 34"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dong_address_textview" />
+                    app:layout_constraintTop_toBottomOf="@+id/dong_address_textview"
+                    android:textSize="10sp"/>
 
                 <EditText
                     android:id="@+id/detail_address_edittext"
@@ -92,7 +133,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/address_spinner"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintTop_toBottomOf="@+id/road_address_textview"
+                    android:textSize="14sp"/>
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/address_spinner"
@@ -115,14 +157,15 @@
                     app:layout_constraintEnd_toStartOf="@+id/address_spinner"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/detail_address_edittext" />
+                    app:layout_constraintTop_toBottomOf="@+id/detail_address_edittext"
+                    android:textSize="14sp"/>
 
-                <CheckBox
+                <ImageView
                     android:id="@+id/safe_number_checkbox"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/square_border"
+                    android:background="@drawable/unchecked"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/phone_edittext" />
 
@@ -134,7 +177,8 @@
                     android:text="안심번호 사용"
                     app:layout_constraintBottom_toBottomOf="@+id/safe_number_checkbox"
                     app:layout_constraintStart_toEndOf="@+id/safe_number_checkbox"
-                    app:layout_constraintTop_toTopOf="@+id/safe_number_checkbox" />
+                    app:layout_constraintTop_toTopOf="@+id/safe_number_checkbox"
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/textView9"
@@ -143,7 +187,7 @@
                     android:layout_marginTop="16dp"
                     android:text="주문 요청사항"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/safe_number_checkbox" />
@@ -158,18 +202,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
                     tools:layout_editor_absoluteX="16dp">
 
-                    <CheckBox
+                    <ImageView
                         android:id="@+id/safe_delivery_checkbox"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/square_border" />
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/unchecked" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="[안전배달] 문 앞에 놓고, 문자주세요!"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -183,11 +228,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-                    <CheckBox
+                    <ImageView
                         android:id="@+id/flastic_checkbox"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/square_border"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:background="@drawable/unchecked"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -198,7 +243,7 @@
                         android:layout_marginStart="8dp"
                         android:text="일회용 숟가락, 젓가락은 안 쓸게요!"
                         android:textColor="@color/black"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/flastic_checkbox"
                         app:layout_constraintStart_toEndOf="@+id/flastic_checkbox"
@@ -211,6 +256,7 @@
                         android:layout_marginTop="2dp"
                         android:text="꼭 필요하지 않다면 체크해 주세요. 일회용품 줄이기 어렵지 않아요!"
                         app:layout_constraintEnd_toEndOf="parent"
+                        android:textSize="12sp"
                         app:layout_constraintStart_toEndOf="@+id/flastic_checkbox"
                         app:layout_constraintTop_toBottomOf="@+id/flastic_checkbox" />
 
@@ -239,8 +285,9 @@
 
                 <TextView
                     android:id="@+id/textView11"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:textSize="16sp"
                     android:background="@drawable/circle_background"
                     android:gravity="center"
                     android:text="2"
@@ -256,13 +303,14 @@
                     android:layout_marginStart="8dp"
                     android:text="결제 수단 선택"
                     android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView11"
                     app:layout_constraintStart_toEndOf="@+id/textView11"
                     app:layout_constraintTop_toTopOf="@+id/textView11" />
 
                 <RadioGroup
+                    android:id="@+id/radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -277,15 +325,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="1dp"
                         android:background="@color/white"
-                        android:buttonTint="@color/light_gray"
+                        android:buttonTint="@color/signature"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:text="요기서 1초 결제"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/span_one_sec_pay"
+                        android:id="@+id/span_one_sec_pay_area"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone">
@@ -339,11 +387,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="1dp"
                         android:background="@color/white"
-                        android:buttonTint="@color/light_gray"
+                        android:buttonTint="@color/signature"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:text="요기서 결제"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
 
@@ -354,7 +402,7 @@
                         android:visibility="gone">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/constraintLayout4"
+                            android:id="@+id/yogiseo_pay_span_area"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
@@ -388,7 +436,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="신용카드"
-                                    android:textSize="18sp"
+                                    android:textSize="14sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@id/creditcard_imageview"
@@ -405,7 +453,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_weight="1"
-                            app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
+                            app:layout_constraintStart_toEndOf="@+id/yogiseo_pay_span_area"
                             app:layout_constraintTop_toTopOf="parent">
 
 
@@ -426,7 +474,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="신용카드"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/creditcard_imageview2"
@@ -441,15 +489,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="1dp"
                         android:background="@color/white"
-                        android:buttonTint="@color/light_gray"
+                        android:buttonTint="@color/signature"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:text="현장결제"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:checked="true"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/pay_method_bottom"
+                        android:id="@+id/directly_pay_method_area"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="1dp"
@@ -484,7 +533,9 @@
                                 android:layout_marginStart="4dp"
                                 android:text="코로나 19 예방을 위해 비대면 배달 권장드립니다."
                                 app:layout_constraintStart_toEndOf="@+id/dot4"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:textSize="10sp"
+                                android:textColor="@color/black"/>
 
                             <View
                                 android:id="@+id/dot5"
@@ -504,6 +555,8 @@
                                 android:layout_marginTop="4dp"
                                 android:text="요기서 결제 선택 후, 문 앞 배달을 요청사항에 남겨주세요"
                                 app:layout_constraintStart_toEndOf="@+id/dot5"
+                                android:textSize="10sp"
+                                android:textColor="@color/black"
                                 app:layout_constraintTop_toBottomOf="@+id/benefit_textvoew1" />
 
                             <View
@@ -523,8 +576,9 @@
                                 android:layout_marginStart="4dp"
                                 android:layout_marginTop="4dp"
                                 android:text="요기서 결제 선택 후, 문 앞 배달을 요청사항에 남겨주세요"
-                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/dot6"
+                                android:textSize="10sp"
+                                android:textColor="@color/black"
                                 app:layout_constraintTop_toBottomOf="@+id/benefit_textvoew2" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -535,7 +589,8 @@
                             app:layout_constraintEnd_toStartOf="@id/directly_cash_pay"
                             app:layout_constraintHorizontal_weight="1"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/constraintLayout8">
+                            app:layout_constraintTop_toBottomOf="@id/constraintLayout8"
+                            android:background="@drawable/square_checked_border">
 
 
                             <ImageView
@@ -543,7 +598,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginEnd="4dp"
-                                android:src="@mipmap/ic_launcher"
+                                android:src="@drawable/checked_creditcard"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/creditcard_textview00"
                                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -555,7 +610,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="신용카드"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/creditcard_imageview00"
@@ -570,15 +625,16 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_weight="1"
                             app:layout_constraintStart_toEndOf="@id/directly_creditcard_pay"
-                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
+                            android:background="@drawable/square_border">
 
 
                             <ImageView
-                                android:id="@+id/creditcard_imageview3"
+                                android:id="@+id/cash_imageview"
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:layout_marginEnd="4dp"
-                                android:src="@mipmap/ic_launcher"
+                                android:src="@drawable/cash"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/creditcard_textview3"
                                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -590,10 +646,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="신용카드"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/creditcard_imageview3"
+                                app:layout_constraintStart_toEndOf="@id/cash_imageview"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -616,7 +672,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
                             app:layout_constraintTop_toBottomOf="@+id/inform_textview2"
-                            app:layout_constraintBottom_toBottomOf="@+id/pay_method_bottom"
+                            app:layout_constraintBottom_toBottomOf="@+id/directly_pay_method_area"
                             />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -649,9 +705,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="코로나 19 예방을 위해 비대면 배달 권장드립니다."
+                            android:text="차이페이로 누구나 5% 할인되는 쿠폰 확인하세요!"
                             app:layout_constraintStart_toEndOf="@+id/view"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textSize="10sp"
+                            android:textColor="@color/black"/>
 
                         <View
                             android:id="@+id/dot2"
@@ -669,9 +727,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="4dp"
-                            android:text="요기서 결제 선택 후, 문 앞 배달을 요청사항에 남겨주세요"
+                            android:text="요기요 신한카드로 결제하면 최대 2만5천원 할인!"
                             app:layout_constraintStart_toEndOf="@+id/dot2"
-                            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView14"
+                            android:textSize="10sp"
+                            android:textColor="@color/black"/>
 
                         <View
                             android:id="@+id/dot3"
@@ -689,10 +749,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:layout_marginTop="4dp"
-                            android:text="요기서 결제 선택 후, 문 앞 배달을 요청사항에 남겨주세요"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:text="요기요 삼성카드혜택을 이벤트 및 공지사항에서 확인하세요"
                             app:layout_constraintStart_toEndOf="@+id/dot3"
-                            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView15"
+                            android:textSize="10sp"
+                            android:textColor="@color/black"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </RadioGroup>
@@ -709,8 +770,8 @@
 
                 <TextView
                     android:id="@+id/numbering_textView3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:background="@drawable/circle_background"
                     android:gravity="center"
                     android:text="3"
@@ -727,7 +788,7 @@
                     android:layout_marginStart="8dp"
                     android:text="할인 방법 선택"
                     android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/numbering_textView3"
                     app:layout_constraintStart_toEndOf="@+id/numbering_textView3"
@@ -749,6 +810,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/discount_area"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="8dp">
 
                 <TextView
@@ -766,10 +828,16 @@
                 <ListView
                     android:id="@+id/order_list"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/order_list_title"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/square_border"/>
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/square_border"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/total_price_textview"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:nestedScrollingEnabled="false"/>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -781,10 +849,11 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/order_list"
-                    android:layout_marginStart="16dp"/>
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView17"/>
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/total_price_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12,000원"
@@ -804,11 +873,12 @@
                     android:background="@color/light_gray"
                     android:padding="10dp"
                     android:text="개인정보 제3자 제공 내용 확인하였으며 결제에 동의합니다."
-                    android:textColor="@color/dark_gray"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/total_price_textview" />
 
                 <TextView
+                    android:id="@+id/order_buttom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -819,7 +889,7 @@
                     android:gravity="center"
                     android:padding="8dp"
                     android:paddingEnd="8dp"
-                    android:text="주문완료"
+                    android:text="결제하기"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -831,7 +901,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

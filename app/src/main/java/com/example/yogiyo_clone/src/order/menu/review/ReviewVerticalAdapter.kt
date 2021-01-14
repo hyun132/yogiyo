@@ -39,7 +39,9 @@ class ReviewVerticalAdapter: RecyclerView.Adapter<ReviewVerticalAdapter.Vertical
         @SuppressLint("SetTextI18n")
         fun bind(item: Entire){
 //            Glide.with(itemView).load(item.icon).into(itemView.findViewById<ImageView>(R.id.user_level_imageview))
-            Glide.with(itemView).load(item.src).into(itemView.findViewById<ImageView>(R.id.review_image))
+            if (item.src == null){
+                itemView.findViewById<ImageView>(R.id.review_image).visibility=View.GONE
+            }else  Glide.with(itemView).load(item.src).into(itemView.findViewById<ImageView>(R.id.review_image))
             itemView.findViewById<TextView>(R.id.user_name).text=item.nickname
             itemView.findViewById<TextView>(R.id.user_date).text=item.date
             itemView.findViewById<RatingBar>(R.id.review_ratingbar).rating= item.totalRate?.toFloat()!!

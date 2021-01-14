@@ -9,7 +9,7 @@ data class Store(
     val deliveryCharge: Int,
     val deliveryTime: String,
     val discountCharge: Int,
-    val icon: String,
+    val icon: String?,
     val isExpress: String,
     val isSuperRedweek: String,
     val limitCharge: Int,

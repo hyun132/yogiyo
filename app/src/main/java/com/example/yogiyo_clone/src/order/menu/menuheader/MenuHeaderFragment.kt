@@ -3,16 +3,22 @@ package com.example.yogiyo_clone.src.order.menu.menuheader
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.view.*
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bumptech.glide.Glide
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.addComma
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.currentStore
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentMenuHeaderBinding
+import com.example.yogiyo_clone.src.order.menu.info.RestaurnatInfoFragment
 import com.example.yogiyo_clone.src.order.menu.menubottom.BottomMenuFragment
+import com.example.yogiyo_clone.src.order.menu.menuheader.model.JjimResponse
 import com.example.yogiyo_clone.src.order.menu.menuheader.model.MenuHeaderResponse
 import com.example.yogiyo_clone.src.order.menu.review.BottomReviewFragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -24,6 +30,44 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
     MenuHeaderFragmentView {
     lateinit var myViewPagerAdapter:ViewPagerAdapter
     var storeIdx:Int=0
+    lateinit var fragment: View
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_menu, menu);
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.action_search -> Log.d("actionbar","search icon clicked")
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+//        return super.onCreateView(inflater, container, savedInstanceState)
+
+//         fragment = inflater.inflate(R.layout.fragment_menu_header, container, false);
+        fragment = super.onCreateView(inflater, container, savedInstanceState)!!
+        setHasOptionsMenu(true);
+
+        return fragment;
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.invalidateOptionsMenu();
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -42,16 +86,24 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
             tab.text=tabLayoutTextArray[position]
         }.attach()
 
+        binding.jjimTextview.setOnClickListener {
+            //찜 눌렀을 때 처리
+            Log.d("jjim : ","Clicked")
+            MenuHeaderService(this).tryJjim(storeIdx)
+        }
+
     }
 
     @SuppressLint("SetTextI18n")
     override fun onGetMenuHeaderSuccess(response: MenuHeaderResponse) {
         Log.d("MenuHeaderFragment : ", "success")
 
+        currentStore=response.result
+
         if(response.result.poster.isNullOrBlank()){
             binding.restaurantImageview.visibility=View.GONE
         }else{
-            val poster= response.result.poster.split('|')
+            val poster= response.result.poster.split(',')
             Glide.with(requireActivity()).load(poster[0]).into(binding.restaurantImageview)
         }
 
@@ -72,17 +124,20 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
         binding.chefReply.text= response.result.description?.toString()
         binding.jjimTextview.text="찜 ${response.result.countLike}"
 
-        binding.shareButton.setOnClickListener {
-            //찜 눌렀을 때 처리
-        }
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = response.result.title
+
     }
 
-    fun addComma(price:Int):String{
-        val dec = DecimalFormat("#,###")
-        return dec.format(price)
-    }
 
     override fun onGetMenuHeaderFailure(message: String) {
+
+    }
+
+    override fun onPostJjimSuccess(response: JjimResponse) {
+        Glide.with(this).load(R.drawable.ic_jjimed).into(binding.jjimIcon)
+    }
+
+    override fun onPostJjimFailure(message: String) {
 
     }
 
@@ -103,7 +158,12 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
                         putInt("storeidx",storeIdx) }
                     fragment
                 }
-                else->BottomMenuFragment()
+                else->{
+                    val fragment = RestaurnatInfoFragment()
+                    fragment.arguments=Bundle().apply {
+                        putInt("storeidx",storeIdx) }
+                    fragment
+                }
             }
         }
 

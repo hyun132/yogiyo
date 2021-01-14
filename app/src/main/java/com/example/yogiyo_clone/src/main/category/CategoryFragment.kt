@@ -95,21 +95,13 @@ CategoryFragmentView{
 
     override fun onCategoryInfoSuccess(result: CategoryResult) {
         val adapter = VerticalAdapter()
-//        adapter.setItemClickListener(object :VerticalAdapter.ItemClickListener{
-//            override fun onClick(view: View, position: Int) {
-//                val intent = Intent(activity,OrderActivity::class.java)
-//                intent.putExtra("storeId",adapter.differ.currentList[position].storeIdx)
-//                startActivity(intent)
-//            }
-//
-//        })
+
         adapter.differ.submitList(result.stores)
         binding.yogiyoRecyclerview.adapter=adapter
         binding.yogiyoRecyclerview.layoutManager=LinearLayoutManager(requireContext())
     }
 
     override fun onCategoryInfoFailure(message: String) {
-        TODO("Not yet implemented")
     }
 
     fun changeCategory(idx: Int){

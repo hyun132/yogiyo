@@ -37,7 +37,7 @@ class BottomMenuFragment : BaseFragment<FragmentBottomMenuBinding>(FragmentBotto
                 data.add(ExpandableListAdapter.Item(menu = child))
             }
         }
-        expandableRecyclerview.adapter=ExpandableListAdapter(data)
+        expandableRecyclerview.adapter=ExpandableListAdapter(data,response.result.basic.storeIdx)
         expandableRecyclerview.addItemDecoration(DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL))
     }
 

@@ -1,21 +1,28 @@
 package com.example.yogiyo_clone.src.order.menu.menubottom
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.src.order.OrderActivity
 import com.example.yogiyo_clone.src.order.menu.menubottom.models.Menu
+import com.example.yogiyo_clone.src.order.menu.menudetail.MenuDetailFragment
+import com.example.yogiyo_clone.util.HorizentalFragment
 
 
-class ExpandableListAdapter(data: MutableList<ExpandableListAdapter.Item>) :
+class ExpandableListAdapter(data: MutableList<ExpandableListAdapter.Item>,_storeidx:Int) :
     RecyclerView.Adapter<RecyclerView.ViewHolder?>() {
     private val data: MutableList<ExpandableListAdapter.Item>
+
+    val storeidx:Int = _storeidx
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): RecyclerView.ViewHolder {
         var view: View? = null
@@ -97,7 +104,7 @@ class ExpandableListAdapter(data: MutableList<ExpandableListAdapter.Item>) :
 //                itemTextView.setText(data[position].groupName)
                 val itemController: ChildHolder? = holder as ChildHolder?
                 if (itemController != null) {
-                    item.menu?.let { itemController.bind(it) }
+                    item.menu?.let { itemController.bind(it,storeidx) }
                 }
             }
         }
@@ -124,7 +131,7 @@ class ExpandableListAdapter(data: MutableList<ExpandableListAdapter.Item>) :
     }
 
     private class ChildHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Menu){
+        fun bind(item: Menu,storeidx:Int){
             itemView.findViewById<TextView>(R.id.yogiseo_discount).visibility=View.GONE
             Glide.with(itemView).load(item.src).into(itemView.findViewById<ImageView>(R.id.menu_imageview))
             itemView.findViewById<TextView>(R.id.menu_name_textview).text=item.title
@@ -133,7 +140,19 @@ class ExpandableListAdapter(data: MutableList<ExpandableListAdapter.Item>) :
 
 
             itemView.setOnClickListener {
-                Log.d("child : ","clicked@@@@")
+                val newFragment = MenuDetailFragment()
+                newFragment.arguments= Bundle().apply {
+                    putInt("menuIdx",item.menuIdx)
+                    putInt("storeIdx",storeidx)
+                    putString("menuName",item.title)
+                }
+                val activity = itemView.context as OrderActivity
+                val transaction = activity.supportFragmentManager.beginTransaction().apply {
+
+                    replace(R.id.order_frame, newFragment)
+                    addToBackStack(null)
+                }
+                transaction.commit();
             }
         }
     }

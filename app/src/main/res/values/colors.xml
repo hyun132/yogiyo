@@ -8,9 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="signature">#FF0051</color>
-    <color name="light_gray">#e5e5e5</color>
-    <color name="standard_gray">#ccc</color>
-    <color name="dark_gray">#999</color>
+    <color name="light_gray">#CCECECEC</color>
+    <color name="standard_gray">#D8D8D8</color>
+    <color name="dark_gray">#AAAAAA</color>
+    <color name="darkest_gray">#888888</color>
     <color name="yellow">#FB9806</color>
 
 </resources>

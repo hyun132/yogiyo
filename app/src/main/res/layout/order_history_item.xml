@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp">
+
+            <ImageView
+                android:id="@+id/delivery_type_imageview"
+                android:layout_width="64dp"
+                android:layout_height="17dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/delivery_order"/>
+
+            <TextView
+                android:id="@+id/order_time_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-10-23"
+                android:textSize="10sp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/is_delivered_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="배달완료"
+                android:textStyle="bold"
+                android:textColor="@color/signature"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/light_gray"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/restaurant_imageview"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/restaurant_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="가게 이름"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/restaurant_imageview"
+                app:layout_constraintTop_toTopOf="@+id/restaurant_imageview" />
+
+            <TextView
+                android:id="@+id/menu_name_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="선택메뉴x1"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/restaurant_name_textview"
+                app:layout_constraintTop_toBottomOf="@+id/restaurant_name_textview" />
+
+            <TextView
+                android:id="@+id/reorder_button"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/square_border"
+                android:paddingStart="16dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="4dp"
+                android:gravity="center_horizontal"
+                android:text="재주문"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/menu_name_textview" />
+
+            <TextView
+                android:id="@+id/order_detail_button"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/square_black_border"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:gravity="center_horizontal"
+                android:text="주문상세"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/reorder_button"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

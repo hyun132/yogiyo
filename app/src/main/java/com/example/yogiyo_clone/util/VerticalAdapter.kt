@@ -38,7 +38,6 @@ class VerticalAdapter: RecyclerView.Adapter<VerticalAdapter.VerticalViewHolder>(
 
     inner class VerticalViewHolder(itemview: View):RecyclerView.ViewHolder(itemview){
 
-        @SuppressLint("SetTextI18n")
         fun bind(item: Store){
             Glide.with(itemView).load(item.icon).into(itemView.findViewById<ImageView>(R.id.restaurant_imageview))
             itemView.findViewById<TextView>(R.id.restaurant_name_textview).text=item.title

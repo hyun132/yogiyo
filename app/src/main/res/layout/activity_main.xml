@@ -17,11 +17,14 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@color/dark_gray"
-        app:itemTextColor="@color/dark_gray"
         app:labelVisibilityMode="labeled"
+        app:itemIconTint="@drawable/menu_selector_color"
+        app:itemTextColor="@drawable/menu_selector_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_main_bottom_nav" />
+        app:menu="@menu/menu_main_bottom_nav"
+        style="@style/BottomNavigationView"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        app:itemIconSize="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

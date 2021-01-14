@@ -32,7 +32,12 @@ class BottomReviewFragment : BaseFragment<FragmentBottomReviewBinding>(FragmentB
         binding.totalReivewTextview.text= response.result.rates.totalRate.toString()
         binding.photoReviewTextview.text= response.result.photos.size.toString()
         //recyclerview
+
+
 //        binding.reviewImageRecyclerview.adapter=
+
+
+
         val reviewAdapter =ReviewVerticalAdapter()
         reviewAdapter.differ.submitList(response.result.entire)
         binding.reviewRecyclerview.adapter = reviewAdapter
