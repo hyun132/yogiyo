@@ -13,8 +13,10 @@ import android.widget.Toast
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.ApplicationClass.Companion.SAVE_TOKEN
 import com.example.yogiyo_clone.config.ApplicationClass.Companion.X_ACCESS_TOKEN
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.sSharedPreferences
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentLoginBinding
+import com.example.yogiyo_clone.src.login.login.model.LogInResponse
 import com.example.yogiyo_clone.src.login.login.model.PostLogInRequest
 import com.example.yogiyo_clone.src.login.login.model.LogInResult
 import com.example.yogiyo_clone.src.login.signupinfo.SignUpInfoFragment
@@ -34,7 +36,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::b
 
             @SuppressLint("ResourceAsColor")
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                binding.loginButton.setBackgroundColor(R.color.signature)
+                context?.getResources()?.let { binding.loginButton.setBackgroundColor(it.getColor(R.color.signature)) };
+
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -69,20 +72,28 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::b
 
     }
 
-    override fun onPostLogInSuccess(logInResult:LogInResult) {
-        val token=logInResult.jwt
-        val pref = requireActivity().getSharedPreferences(X_ACCESS_TOKEN, Application.MODE_PRIVATE)
-        pref.edit().putString(X_ACCESS_TOKEN,token).commit()
-        Log.d("LoginFragment","로그인성공")
-        Log.d("sharedPreference",token)
-        Toast.makeText(context, "로그인성공", Toast.LENGTH_SHORT).show()
-        if(binding.autoLoginCheckbox.isChecked){
-            SAVE_TOKEN=true
-        }
-        var intent = Intent(this.activity,MainActivity::class.java)
-        startActivity(intent)
+    override fun onPostLogInSuccess(response:LogInResponse) {
+        var logInResult = response.result
+        val token= logInResult?.jwt
+//        val pref = requireActivity().getSharedPreferences(X_ACCESS_TOKEN, Application.MODE_PRIVATE)
+//        pref.edit().putString(X_ACCESS_TOKEN,token).apply()
 
-//        activity?.finish()
+        if (token != null) {
+            Log.d("sharedPreference",token)
+        }
+
+        if (response.code==1000){
+            var intent = Intent(this.activity,MainActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(context, "로그인성공", Toast.LENGTH_SHORT).show()
+            sSharedPreferences.edit().putString(X_ACCESS_TOKEN,token).apply()
+            if(binding.autoLoginCheckbox.isChecked){
+                SAVE_TOKEN=true
+            }
+        }else showCustomToast("아이디 비밀번호를 올바르게 입력해주세요")
+
+
+
     }
 
     override fun onPostLogInFailure(message: String) {

@@ -33,7 +33,7 @@
             android:layout_gravity="center_vertical"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:background="@drawable/square_border"
+            android:background="@drawable/border_square"
             android:backgroundTint="@color/white">
 
             <ImageView

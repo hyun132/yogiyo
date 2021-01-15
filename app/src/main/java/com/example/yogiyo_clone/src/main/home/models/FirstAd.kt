@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class FirstAd(
     val adIdx: Int,
-    val src: String
+    val src: String?
 )

@@ -11,7 +11,7 @@ data class Store(
     val deliveryTime: String,
     val discountCharge: Int,
     val isExpress: String,
-    val menus: String,
+    val menus: String?,
     val rateAvg: Float?,
     val src: String?,
     val storeIdx: Int,

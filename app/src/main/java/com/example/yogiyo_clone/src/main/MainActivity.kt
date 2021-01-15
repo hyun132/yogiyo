@@ -1,9 +1,12 @@
 package com.example.yogiyo_clone.src.main
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.SAVE_TOKEN
 import com.example.yogiyo_clone.config.BaseActivity
 import com.example.yogiyo_clone.databinding.ActivityMainBinding
+import com.example.yogiyo_clone.src.login.LoginActivity
 import com.example.yogiyo_clone.src.main.home.HomeFragment
 import com.example.yogiyo_clone.src.main.myyogiyo.MyYogiyoFragment
 import com.example.yogiyo_clone.src.main.orderlist.OrderListFragment
@@ -14,6 +17,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if(SAVE_TOKEN==false){
+            var intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
 

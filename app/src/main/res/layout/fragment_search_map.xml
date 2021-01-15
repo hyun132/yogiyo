@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/square_border">
+        android:background="@drawable/border_square">
 
         <FrameLayout
             android:id="@+id/map_frame"
@@ -73,7 +73,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/square_border"
+        android:background="@drawable/border_square"
         android:hint="상세주소를 입력하세요 (건물명, 동/호수 등)"
         android:inputType="text"
         android:paddingStart="8dp"

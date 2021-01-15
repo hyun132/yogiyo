@@ -7,7 +7,7 @@ import java.io.Serializable
 
 
 data class Theme(
-    val stores: List<Store>,
+    val stores: List<Store>?,
     val themeIdx: Int,
     val themeName: String
     ):Serializable

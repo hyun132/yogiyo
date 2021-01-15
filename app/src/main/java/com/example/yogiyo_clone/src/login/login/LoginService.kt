@@ -14,7 +14,7 @@ class LoginService(val view: LoginFragment) { // 얘는 이전에 repository랑 
         val homeRetrofitInterface = ApplicationClass.sRetrofit.create(LoginRetrofitInterface::class.java)
         homeRetrofitInterface.logIn(postLogInRequest).enqueue(object : Callback<LogInResponse>{
             override fun onResponse(call: Call<LogInResponse>, response: Response<LogInResponse>) {
-                response.body()?.result?.let { view.onPostLogInSuccess(it) }
+                response.body()?.let { view.onPostLogInSuccess(it) }
                 Log.d("onResponse", response.body()?.result?.jwt.toString())
             }
 

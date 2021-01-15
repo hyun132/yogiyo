@@ -205,7 +205,7 @@ class OrderFragment : BaseFragment<FragmentOrderBinding>(
                 for (option in item.options!!){
                     optionTxt+="${option.optionName},"
                 }
-                if (optionTxt.last()==',') {optionTxt.dropLast(1)}
+                if (optionTxt.isNotEmpty() && optionTxt.last()==',') {optionTxt.dropLast(1)}
             }
             convertView.findViewById<TextView>(R.id.menu_option_name_textview).text=optionTxt
             return convertView

@@ -78,6 +78,7 @@
             app:layout_constraintTop_toTopOf="@+id/taste_label" />
 
         <TextView
+            android:id="@+id/taste_review_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -115,6 +116,7 @@
             app:layout_constraintTop_toTopOf="@+id/amount_label" />
 
         <TextView
+            android:id="@+id/amount_review_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -152,6 +154,7 @@
             app:layout_constraintTop_toTopOf="@+id/delivery_label" />
 
         <TextView
+            android:id="@+id/delivery_review_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -205,7 +208,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
@@ -214,6 +216,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
             android:text="리뷰"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -257,6 +260,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/total_review_label" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,13 +18,15 @@
         android:layout_height="45dp"
         android:background="@color/white"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="@drawable/menu_selector_color"
-        app:itemTextColor="@drawable/menu_selector_color"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main_bottom_nav"
         style="@style/BottomNavigationView"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         app:itemIconSize="20dp" />
+
+<!--    app:itemIconTint="@drawable/menu_selector_color"-->
+<!--    app:itemTextColor="@drawable/menu_selector_color"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

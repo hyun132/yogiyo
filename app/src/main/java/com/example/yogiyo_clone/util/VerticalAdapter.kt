@@ -41,7 +41,7 @@ class VerticalAdapter: RecyclerView.Adapter<VerticalAdapter.VerticalViewHolder>(
         fun bind(item: Store){
             Glide.with(itemView).load(item.icon).into(itemView.findViewById<ImageView>(R.id.restaurant_imageview))
             itemView.findViewById<TextView>(R.id.restaurant_name_textview).text=item.title
-            itemView.findViewById<TextView>(R.id.review_grade_textview).text=item.rateAvg.toString()
+            if (item.rateAvg!=null) itemView.findViewById<TextView>(R.id.review_grade_textview).text=item.rateAvg.toString()
             itemView.findViewById<TextView>(R.id.review_number_textview).text="리뷰 ${item.countReview}"
             itemView.findViewById<TextView>(R.id.represent_discount_textview).text="${item.discountCharge}원 할인"
             if (item.deliveryCharge!=null){

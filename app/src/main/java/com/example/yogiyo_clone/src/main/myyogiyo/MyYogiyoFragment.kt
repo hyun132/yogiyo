@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.yogiyo_clone.R
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.SAVE_TOKEN
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentMyYogiyoBinding
 import com.example.yogiyo_clone.src.login.LoginActivity
@@ -24,6 +25,13 @@ class MyYogiyoFragment : BaseFragment<FragmentMyYogiyoBinding>(FragmentMyYogiyoB
             val intent=Intent(activity,LoginActivity::class.java)
             intent.putExtra("screen",1)
             startActivity(intent)
+        }
+        //after_user_info_area
+        if(SAVE_TOKEN==true){
+            binding.afterUserInfoArea.visibility=View.VISIBLE
+            binding.cuponNumberTextview.text="0장"
+            binding.pointNumberTextview.text="0원"
+            binding.reviewNumberTextview.text="0건"
         }
 
     }

@@ -1,10 +1,11 @@
 package com.example.yogiyo_clone.src.login.login
 
+import com.example.yogiyo_clone.src.login.login.model.LogInResponse
 import com.example.yogiyo_clone.src.login.login.model.LogInResult
 
 interface LoginFragmentView {
 
-    fun onPostLogInSuccess(logInResult: LogInResult)
+    fun onPostLogInSuccess(logInResult: LogInResponse)
 
     fun onPostLogInFailure(message: String)
 

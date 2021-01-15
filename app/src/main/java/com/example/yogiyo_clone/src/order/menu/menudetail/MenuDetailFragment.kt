@@ -50,7 +50,7 @@ class MenuDetailFragment : BaseFragment<FragmentMenuDetailBinding>(
             //메뉴 이미 있으면 count+1
             //어
 
-            onDestroy()
+            activity?.onBackPressed()
         }
 
         binding.orderNowButton.setOnClickListener {

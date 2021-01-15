@@ -20,7 +20,7 @@ class ThemeHorizontalAdapter(array:List<Store>):RecyclerView.Adapter<ThemeHorizo
         @SuppressLint("SetTextI18n")
         fun bind(item:Store,position: Int){
             itemView.findViewById<TextView>(R.id.restaurant_name_textview).text=item.title
-            itemView.findViewById<TextView>(R.id.review_grade_textview).text="${item.rateAvg}"
+            if (item.rateAvg!=null) itemView.findViewById<TextView>(R.id.review_grade_textview).text="${item.rateAvg}"
             itemView.findViewById<TextView>(R.id.review_number_textview).text="리뷰 ${item.countReview}"
             itemView.findViewById<TextView>(R.id.inform_textview).text=item.deliveryTime.split('~')[0]
             Glide.with(itemView.context).load(item.src).centerCrop().into(itemView.findViewById(R.id.restaurant_imageview))

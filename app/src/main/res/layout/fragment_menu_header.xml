@@ -326,7 +326,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/square_border"
+            android:background="@drawable/border_square"
             android:padding="8dp"
             app:layout_constraintEnd_toStartOf="@+id/share_button"
             app:layout_constraintHorizontal_weight="1"
@@ -364,7 +364,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/square_border"
+            android:background="@drawable/border_square"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/jjim_container"
             app:layout_constraintBottom_toTopOf="@+id/tablayout"
@@ -427,7 +427,7 @@
     <LinearLayout
         android:id="@+id/bottom_button_area"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="50dp">
         <TextView
             android:id="@+id/order_by_call_button"
             android:layout_width="0dp"

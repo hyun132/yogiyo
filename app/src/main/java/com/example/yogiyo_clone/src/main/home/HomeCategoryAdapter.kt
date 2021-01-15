@@ -23,7 +23,7 @@ class HomeCategoryAdapter:RecyclerView.Adapter<HomeCategoryAdapter.CategoryViewH
     inner class CategoryViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         fun bind(item:Category){
             itemView.findViewById<TextView>(R.id.category_title).text=item.category_name
-            Glide.with(itemView.context).load(item.category_img).into(itemView.findViewById(R.id.category_imageview))
+            Glide.with(itemView.context).load(item.image).centerCrop().into(itemView.findViewById(R.id.category_imageview))
 
             itemView.setOnClickListener {
                 val newFragment = CategoryFragment()

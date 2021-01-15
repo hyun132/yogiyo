@@ -25,7 +25,7 @@
         app:layout_constraintHorizontal_weight="1"
         android:layout_height="45dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/square_border"
+        android:background="@drawable/border_square"
         android:hint="휴대전화 번호('-'제외)"
         android:inputType="number"
         android:paddingStart="8dp"
@@ -39,7 +39,7 @@
         android:id="@+id/send_sms_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/square_border"
+        android:background="@drawable/border_square"
         android:padding="10dp"
         android:text="인증번호 받기"
         android:textColor="@color/black"
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/square_border"
+        android:background="@drawable/border_square"
         android:hint="4자리 인증번호"
         android:inputType="number"
         android:paddingStart="8dp"
@@ -88,8 +88,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19"
-        android:letterSpacing="0.8"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
 
 

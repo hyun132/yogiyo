@@ -18,6 +18,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.yogiyo_clone.R
 import com.example.yogiyo_clone.config.ApplicationClass.Companion.addComma
+import com.example.yogiyo_clone.config.ApplicationClass.Companion.roadAddress
 import com.example.yogiyo_clone.config.BaseFragment
 import com.example.yogiyo_clone.databinding.FragmentHomeBinding
 import com.example.yogiyo_clone.databinding.FragmentViewpagerBinding
@@ -39,23 +40,33 @@ class HomeFragment :
     private lateinit var viewPager: ViewPager2
 
     val categories = listOf<Category>(
-        Category("전체보기", R.drawable.circle_background, 0),
-        Category("중국집", R.drawable.circle_background, 2),
-        Category("치킨", R.drawable.circle_background, 3),
-        Category("한식", R.drawable.circle_background, 4),
-        Category("피자/양식", R.drawable.circle_background, 5),
-        Category("찜/탕", R.drawable.circle_background, 6),
-        Category("카페/디저트", R.drawable.circle_background, 7),
-        Category("분식", R.drawable.circle_background, 8),
-        Category("1인분주문", R.drawable.circle_background, 9),
-        Category("일식/돈까스", R.drawable.circle_background, 10),
-        Category("야식", R.drawable.circle_background, 11),
-        Category("족발/보쌈", R.drawable.circle_background, 12),
-        Category("프랜차이즈", R.drawable.circle_background, 13),
-        Category("편의점/마트", R.drawable.circle_background, 14),
-        Category("테이크아웃", R.drawable.circle_background, 15),
+        Category("전체보기", R.drawable.circle_background, 0,R.drawable.category_total),
+        Category("중국집", R.drawable.circle_background, 2,R.drawable.category_jungsick),
+        Category("치킨", R.drawable.circle_background, 3,R.drawable.category_chicken),
+        Category("한식", R.drawable.circle_background, 4,R.drawable.category_hansick),
+        Category("피자/양식", R.drawable.circle_background, 5,R.drawable.category_pizza),
+        Category("찜/탕", R.drawable.circle_background, 6,R.drawable.category_jjintang),
+        Category("카페/디저트", R.drawable.circle_background, 7,R.drawable.category_cafe),
+        Category("분식", R.drawable.circle_background, 8,R.drawable.category_bunsick),
+        Category("1인분주문", R.drawable.circle_background, 9,R.drawable.category_inbun),
+        Category("일식/돈까스", R.drawable.circle_background, 10,R.drawable.category_ilsick),
+        Category("야식", R.drawable.circle_background, 11,R.drawable.category_yasick),
+        Category("족발/보쌈", R.drawable.circle_background, 12,R.drawable.category_jockbal),
+        Category("프랜차이즈", R.drawable.circle_background, 13,R.drawable.category_franchise),
+        Category("편의점/마트", R.drawable.circle_background, 14,R.drawable.category_convenience),
+        Category("테이크아웃", R.drawable.circle_background, 15,R.drawable.category_takeout),
 //                Category("익스프레스",R.drawable.circle_background,1),
     )
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = super.onCreateView(inflater, container, savedInstanceState)
+        binding.addressButton.text = "${roadAddress} ▾"
+        return view
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,7 +86,7 @@ class HomeFragment :
 
         binding.categoryRecyclerview.layoutManager =
             GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
-        binding.categoryRecyclerview.addItemDecoration(HorizontalRecyclerDecoration(32))
+        binding.categoryRecyclerview.addItemDecoration(HorizontalRecyclerDecoration(40))
         binding.addressButton.setOnClickListener {
             var intent = Intent(context, SearchAddressMainActivity::class.java)
             startActivity(intent)
@@ -95,14 +106,14 @@ class HomeFragment :
     override fun onGetHomeInfoSuccess(response: HomeResponse) {
 
         val viewPagerAdapter =
-            ViewPagerAdapter(this, response.result.firstAd)   //이 프래그먼트에 뷰페이저 어답터 생성.
+            response.result?.firstAd?.let { ViewPagerAdapter(this, it) }   //이 프래그먼트에 뷰페이저 어답터 생성.
         viewPager = binding.adViewpager
         viewPager.adapter = viewPagerAdapter  //viewPager에 Adapter 연결해줌.
 
-        binding.addressButton.text = "${response.result.address} ▾"
+        binding.addressButton.text = "${response.result?.address} ▾"
         val newFragment = HorizentalFragment()
         newFragment.arguments = Bundle().apply {
-            putSerializable("theme", response.result.themes[0])
+            putSerializable("theme", response.result?.themes?.get(0))
         }
 //        newFragment.data=
         val transaction = requireActivity().supportFragmentManager.beginTransaction().apply {
@@ -159,11 +170,11 @@ class HomeFragment :
         R.layout.fragment_viewpager
     ) {
         var position: Int = 0
-        lateinit var imageUri: List<FirstAd>
+        var imageUri: List<FirstAd>? = null
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            Glide.with(this).load(imageUri[position].src).centerCrop().into(binding.slidingImage)
+            Glide.with(this).load(imageUri?.get(position)?.src).centerCrop().into(binding.slidingImage)
         }
 
     }
@@ -197,7 +208,7 @@ class HomeFragment :
 
                 convertView.findViewById<TextView>(R.id.restaurant_name_textview).text = item.title
                 convertView.findViewById<TextView>(R.id.delivery_time_textview).text = item.deliveryTime.toString()
-                convertView.findViewById<TextView>(R.id.reivew_score_textview).text = item.rateAvg.toString()
+                if (item.rateAvg!=null) convertView.findViewById<TextView>(R.id.reivew_score_textview).text = item.rateAvg.toString()
                 convertView.findViewById<TextView>(R.id.review_number_textview).text = "리뷰 ${item.countReview}"
                 if (item.deliveryCharge!! >0) convertView.findViewById<TextView>(R.id.delivery_fee_textview).text = "배달요금 ${addComma(item.deliveryCharge)}원"
 

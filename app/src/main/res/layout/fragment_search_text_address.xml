@@ -21,7 +21,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:background="@drawable/square_border"
+            android:background="@drawable/border_square"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintEnd_toStartOf="@+id/cancel_search_button"

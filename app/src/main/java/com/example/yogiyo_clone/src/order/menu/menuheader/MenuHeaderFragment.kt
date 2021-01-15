@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -22,15 +20,18 @@ import com.example.yogiyo_clone.src.order.menu.menuheader.model.JjimResponse
 import com.example.yogiyo_clone.src.order.menu.menuheader.model.MenuHeaderResponse
 import com.example.yogiyo_clone.src.order.menu.review.BottomReviewFragment
 import com.google.android.material.tabs.TabLayoutMediator
-import java.text.DecimalFormat
 
 
-class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuHeaderBinding::bind,
-    R.layout.fragment_menu_header),
+
+class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(
+    FragmentMenuHeaderBinding::bind,
+    R.layout.fragment_menu_header
+),
     MenuHeaderFragmentView {
-    lateinit var myViewPagerAdapter:ViewPagerAdapter
-    var storeIdx:Int=0
+    lateinit var myViewPagerAdapter: ViewPagerAdapter
+    var storeIdx: Int = 0
     lateinit var fragment: View
+    var savenum: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,11 +55,12 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
         super.onResume()
         activity?.invalidateOptionsMenu();
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.getInt("storeIdx")?.let {
-            storeIdx=it
+            storeIdx = it
             MenuHeaderService(this).tryLogIn(it)
             Log.d("idx : ", it.toString())
         }
@@ -67,14 +69,17 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
         myViewPagerAdapter = ViewPagerAdapter(requireActivity())
         binding.viewpager.adapter = myViewPagerAdapter
 //        val tabLayout = view.findViewById<TabLayout>(R.id.menu_tablayout)   //fragment이기 때문에 root view에서 위젯 가져와야함.
-        val tabLayoutTextArray= arrayListOf<String>("메뉴","클린리뷰","정보")    //tab이름 설정
-        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->         //tabLayout과 ViewPager를 연결해줌.
-            tab.text=tabLayoutTextArray[position]
+        val tabLayoutTextArray = arrayListOf<String>("메뉴", "클린리뷰", "정보")    //tab이름 설정
+        TabLayoutMediator(
+            binding.tablayout,
+            binding.viewpager
+        ) { tab, position ->         //tabLayout과 ViewPager를 연결해줌.
+            tab.text = tabLayoutTextArray[position]
         }.attach()
 
         binding.jjimContainer.setOnClickListener {
             //찜 눌렀을 때 처리
-            Log.d("jjim : ","Clicked")
+            Log.d("jjim : ", "Clicked")
             MenuHeaderService(this).tryJjim(storeIdx)
         }
 
@@ -84,40 +89,41 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
     override fun onGetMenuHeaderSuccess(response: MenuHeaderResponse) {
         Log.d("MenuHeaderFragment : ", "success")
 
-//        binding.standardHeaderToolbar.standardActionTitle.text = response.result.title
+        binding.standardHeaderToolbar.standardActionTitle.text = response.result.title
 
-        currentStore=response.result
+        currentStore = response.result
 
-        if(response.result.poster.isNullOrBlank()){
-            binding.restaurantImageview.visibility=View.GONE
-        }else{
-            val poster= response.result.poster.split(',')
+        if (response.result.poster.isNullOrBlank()) {
+            binding.restaurantImageview.visibility = View.GONE
+        } else {
+            val poster = response.result.poster.split(',')
             Glide.with(requireActivity()).load(poster[0]).into(binding.restaurantImageview)
         }
 
-//        activity?.actionBar?.title=response.result.title
-//        binding.restaurant.text= response.result.title
         binding.restaurantNameTextview.text = response.result.title
-        val avg:Float= currentStore!!.rateAvg?.toFloat() ?:0F
-        binding.restaurantRatingBar.rating= avg
-        if (currentStore!!.rateAvg!=null){
-            binding.restaurantReviewRate.text=response.result.rateAvg.toString()
+        val avg: Float = currentStore!!.rateAvg?.toFloat() ?: 0F
+        binding.restaurantRatingBar.rating = avg
+        if (currentStore!!.rateAvg != null) {
+            binding.restaurantReviewRate.text = response.result.rateAvg.toString()
         }
 
-        if(response.result.discountCharge==0){
-            binding.restaurantDiscountTextview.isGone=true
-        }else{
-            binding.restaurantDiscountTextview.text="${response.result.discountCharge?.let { addComma(it) }}원 할인"
+        if (response.result.discountCharge == 0) {
+            binding.restaurantDiscountTextview.isGone = true
+        } else {
+            binding.restaurantDiscountTextview.text =
+                "${response.result.discountCharge?.let { addComma(it) }}원 할인"
         }
-        binding.restaurantEstimatedTimeTextview.text="배달예상시간 ${response.result.deliveryTime}"
-        binding.minimumOrderPrice.text="${response.result.limitCharge?.let { addComma(it) }}원"
-        binding.payMethod.text=response.result.paymentSystem
-        binding.deliveryFee.text="${response.result.deliveryCharge?.let { addComma(it) }}원"
-        binding.chefReply.text= response.result.description?.toString()
-        if(response.result.isLike=="true"){
+        binding.restaurantEstimatedTimeTextview.text = "배달예상시간 ${response.result.deliveryTime}"
+        binding.minimumOrderPrice.text = "${response.result.limitCharge?.let { addComma(it) }}원"
+        binding.payMethod.text = response.result.paymentSystem
+        binding.deliveryFee.text = "${response.result.deliveryCharge?.let { addComma(it) }}원"
+        binding.chefReply.text = response.result.description?.toString()
+        if (response.result.isLike == "TRUE") {
             Glide.with(this).load(R.drawable.ic_jjimed).into(binding.jjimIcon)
         }
-        binding.jjimTextview.text="찜 ${response.result.countLike}"
+        if (response.result.countLike != null) savenum = response.result.countLike
+
+        binding.jjimTextview.text = "찜 ${response.result.countLike}"
 
     }
 
@@ -127,12 +133,14 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
     }
 
     override fun onPostJjimSuccess(response: JjimResponse) {
-        if(response.code==1000){
+        if (response.code == 1000) {
             Glide.with(this).load(R.drawable.ic_jjimed).into(binding.jjimIcon)
-            binding.jjimTextview.text=( Integer.parseInt(binding.jjimTextview.text.toString()) + 1).toString()
-        }else if(response.code==1001){
+            binding.jjimTextview.text = "찜 ${(savenum + 1)}"
+            savenum += 1
+        } else if (response.code == 1001) {
             Glide.with(this).load(R.drawable.ic_jjim).into(binding.jjimIcon)
-            binding.jjimTextview.text=(Integer.parseInt(binding.jjimTextview.text.toString()) -1).toString()
+            binding.jjimTextview.text = "찜 ${(savenum - 1)}"
+            savenum -= 1
         }
 
     }
@@ -141,27 +149,30 @@ class MenuHeaderFragment : BaseFragment<FragmentMenuHeaderBinding>(FragmentMenuH
 
     }
 
-    inner class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
-        override fun getItemCount(): Int =3
+    inner class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
+        FragmentStateAdapter(fragmentActivity) {
+        override fun getItemCount(): Int = 3
         override fun createFragment(position: Int): Fragment {
-            return when(position){
-                0->{
+            return when (position) {
+                0 -> {
                     val fragment = BottomMenuFragment()
-                    fragment.arguments=Bundle().apply {
-                        putInt("storeidx",storeIdx)
+                    fragment.arguments = Bundle().apply {
+                        putInt("storeidx", storeIdx)
                     }
                     fragment
                 }
                 1 -> {
                     val fragment = BottomReviewFragment()
-                    fragment.arguments=Bundle().apply {
-                        putInt("storeidx",storeIdx) }
+                    fragment.arguments = Bundle().apply {
+                        putInt("storeidx", storeIdx)
+                    }
                     fragment
                 }
-                else->{
+                else -> {
                     val fragment = RestaurnatInfoFragment()
-                    fragment.arguments=Bundle().apply {
-                        putInt("storeidx",storeIdx) }
+                    fragment.arguments = Bundle().apply {
+                        putInt("storeidx", storeIdx)
+                    }
                     fragment
                 }
             }

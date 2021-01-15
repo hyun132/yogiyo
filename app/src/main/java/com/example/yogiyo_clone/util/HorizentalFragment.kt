@@ -15,10 +15,12 @@ class HorizentalFragment : BaseFragment<FragmentHorizentalBinding>(FragmentHoriz
         super.onViewCreated(view, savedInstanceState)
 
         var data:Theme? = null
-        data = arguments?.getSerializable("theme") as Theme
+        data = arguments?.getSerializable("theme") as Theme?
 
-        binding.horizontalTitle.text=data.themeName
-        val themeAdapter=ThemeHorizontalAdapter(data.stores)
+        if (data != null) {
+            binding.horizontalTitle.text=data.themeName
+        }
+        val themeAdapter= data?.let { it.stores?.let { it1 -> ThemeHorizontalAdapter(it1) } }
 //        themeAdapter.setItemClickListener(object :ThemeHorizontalAdapter.ItemClickListener{
 //            override fun onClick(view: View, position: Int) {
 //                Log.d("hello","clicked")
